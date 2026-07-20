@@ -1,0 +1,40 @@
+generated: '2026-07-18'
+method: searched
+source: https://api.shapeshift.com/docs
+notes: >-
+  The ShapeShift Public API does not declare securitySchemes in its OpenAPI, but
+  authentication is documented through its Auth operations: Sign-In With Ethereum
+  (SIWE, EIP-4361). A client fetches a nonce (siweNonce), the wallet signs the
+  SIWE message, and siweVerify returns a JWT bearer token used on authenticated
+  endpoints (affiliate create/update). Read endpoints (assets, chains, swap
+  quotes/rates/status) are public. Swap and affiliate endpoints also accept an
+  X-Partner-Code header for partner/affiliate attribution (not authentication).
+summary:
+  types: [siwe, http-bearer-jwt]
+  public_endpoints: true
+  api_key_in: []
+  oauth2_flows: []
+schemes:
+  - name: SIWE
+    type: siwe
+    standard: EIP-4361 (Sign-In With Ethereum)
+    flow:
+      - "POST /v1/auth/siwe/nonce (siweNonce) -> nonce"
+      - "Wallet signs the SIWE message containing the nonce"
+      - "POST /v1/auth/siwe/verify (siweVerify) -> { token (JWT), address }"
+    sources: [openapi/classic-shapeshift-openapi-original.json]
+  - name: bearerAuth
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+    description: JWT returned by siweVerify, sent as Authorization Bearer on authenticated affiliate operations (401/403 on failure).
+    applies_to: [createAffiliate, updateAffiliate]
+    sources: [openapi/classic-shapeshift-openapi-original.json]
+  - name: X-Partner-Code
+    type: apiKey
+    in: header
+    parameter: X-Partner-Code
+    role: attribution
+    description: Partner/affiliate code passed on swap endpoints for attribution; not an authentication credential.
+    applies_to: [getSwapQuote, getSwapRates, getSwapStatus]
+    sources: [openapi/classic-shapeshift-openapi-original.json]
