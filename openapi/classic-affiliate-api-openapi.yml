@@ -1,0 +1,771 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: ShapeShift Public Affiliate API
+  description: 'The ShapeShift Public API lets you integrate multi-chain swap functionality into your application. Fetch rates from multiple DEX aggregators and bridges, build executable quotes, and track swaps across supported blockchains.
+
+
+    ## Base URL
+
+
+    ```
+
+    https://api.shapeshift.com
+
+    ```
+
+
+    All endpoints are versioned under `/v1` (e.g. `https://api.shapeshift.com/v1/swap/rates`). This interactive reference is served at `https://api.shapeshift.com/docs`, and the raw OpenAPI document at `https://api.shapeshift.com/docs/json`.
+
+
+    ## Two ways to integrate
+
+
+    1. **Swap Widget SDK** — a drop-in React component with built-in UI, wallet connection, and multi-chain support. The fastest path. See the **Swap Widget SDK** section.
+
+    2. **REST API** — call the endpoints directly and build your own UI for full control over UX. See the **REST API Guide** section, then the per-endpoint reference below.
+
+
+    ## Affiliate tracking (optional)
+
+
+    Send an `X-Partner-Code` header with your registered partner code (e.g. `your-partner-code`) on the swap endpoints to attribute swaps for affiliate revenue share. The API attributes the swap to your affiliate account and applies your configured fee (bps) automatically. All endpoints work without it — unattributed swaps use the default fee. See the [Affiliate Program guide](https://github.com/shapeshift/web/blob/develop/docs/affiliates.md) for how to obtain a code.
+
+
+    ## Asset IDs (CAIP-19)
+
+
+    Assets are identified with [CAIP-19](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-19.md): `{chainId}/{assetNamespace}:{assetReference}`
+
+
+    - Native ETH: `eip155:1/slip44:60`
+
+    - USDC on Ethereum: `eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
+
+    - Native BTC: `bip122:000000000019d6689c085ae165831e93/slip44:0`
+
+
+    Chains use [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) (e.g. `eip155:1`). Use `GET /v1/chains` and `GET /v1/assets` to discover supported values.
+
+
+    ## Errors
+
+
+    Errors return the appropriate HTTP status and a JSON body:
+
+
+    ```json
+
+    { "error": "Human-readable message", "code": "MACHINE_CODE", "details": [] }
+
+    ```
+
+
+    `code` and `details` are present where applicable (e.g. `QUOTE_NOT_FOUND`, `TX_HASH_REQUIRED`, `TX_HASH_MISMATCH`, `RATE_LIMIT_EXCEEDED`, validation `details`).
+
+
+    ## Rate limiting
+
+
+    Endpoints are rate limited per IP on a fixed 60-second window. A global limit applies across all endpoints, and individual endpoint groups (data, rates, quote, status, affiliate) have their own independent limits on top of it — so a request counts against both. When either is exceeded, the API returns `429` with code `RATE_LIMIT_EXCEEDED` and these headers:
+
+
+    - `Retry-After` — seconds until the window resets
+
+    - `RateLimit-Limit` — max requests allowed per window
+
+    - `RateLimit-Remaining` — requests remaining in the current window
+
+    - `RateLimit-Reset` — seconds until the window resets
+
+
+    Back off using `Retry-After` and avoid polling faster than necessary (see the REST API Guide for polling guidance).
+
+    '
+servers:
+- url: https://api.shapeshift.com
+- url: http://localhost:3001
+tags:
+- name: Affiliate
+paths:
+  /v1/affiliate:
+    post:
+      operationId: createAffiliate
+      summary: Create affiliate
+      description: Register a new affiliate. Requires a valid SIWE JWT in the Authorization header.
+      tags:
+      - Affiliate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                walletAddress:
+                  type: string
+                  pattern: ^0x[0-9a-fA-F]{40}$
+                  example: '0x1234567890123456789012345678901234567890'
+                receiveAddress:
+                  type: string
+                  pattern: ^0x[0-9a-fA-F]{40}$
+                  example: '0x1234567890123456789012345678901234567890'
+                partnerCode:
+                  type: string
+                  minLength: 3
+                  maxLength: 32
+                  pattern: ^[a-z0-9]+$
+                bps:
+                  type: integer
+                  minimum: 0
+                  maximum: 1000
+              required:
+              - walletAddress
+              - partnerCode
+              - bps
+      responses:
+        '201':
+          description: Affiliate created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliateConfig'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Affiliate already exists
+        '429':
+          description: Rate limit exceeded. Includes Retry-After header with seconds until reset.
+          headers:
+            Retry-After:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+            RateLimit-Limit:
+              description: Maximum requests allowed per window
+              schema:
+                type: integer
+                example: 60
+            RateLimit-Remaining:
+              description: Requests remaining in the current window
+              schema:
+                type: integer
+                example: 0
+            RateLimit-Reset:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '500':
+          description: Internal server error
+        '503':
+          description: Swap service unavailable
+        '504':
+          description: Swap service timed out
+  /v1/affiliate/{address}:
+    get:
+      operationId: getAffiliate
+      summary: Get affiliate config
+      description: Retrieve affiliate configuration for a given wallet address.
+      tags:
+      - Affiliate
+      parameters:
+      - schema:
+          type: string
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        required: true
+        name: address
+        in: path
+      responses:
+        '200':
+          description: Affiliate configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliateConfig'
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: Affiliate not found
+        '429':
+          description: Rate limit exceeded. Includes Retry-After header with seconds until reset.
+          headers:
+            Retry-After:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+            RateLimit-Limit:
+              description: Maximum requests allowed per window
+              schema:
+                type: integer
+                example: 60
+            RateLimit-Remaining:
+              description: Requests remaining in the current window
+              schema:
+                type: integer
+                example: 0
+            RateLimit-Reset:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '500':
+          description: Internal server error
+        '503':
+          description: Swap service unavailable
+        '504':
+          description: Swap service timed out
+    patch:
+      operationId: updateAffiliate
+      summary: Update affiliate
+      description: Update an existing affiliate configuration. Requires a valid SIWE JWT in the Authorization header.
+      tags:
+      - Affiliate
+      parameters:
+      - schema:
+          type: string
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        required: true
+        name: address
+        in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                receiveAddress:
+                  type: string
+                  pattern: ^0x[0-9a-fA-F]{40}$
+                  example: '0x1234567890123456789012345678901234567890'
+                bps:
+                  type: integer
+                  minimum: 0
+                  maximum: 1000
+      responses:
+        '200':
+          description: Updated affiliate configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliateConfig'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Affiliate not found
+        '429':
+          description: Rate limit exceeded. Includes Retry-After header with seconds until reset.
+          headers:
+            Retry-After:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+            RateLimit-Limit:
+              description: Maximum requests allowed per window
+              schema:
+                type: integer
+                example: 60
+            RateLimit-Remaining:
+              description: Requests remaining in the current window
+              schema:
+                type: integer
+                example: 0
+            RateLimit-Reset:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '500':
+          description: Internal server error
+        '503':
+          description: Swap service unavailable
+        '504':
+          description: Swap service timed out
+  /v1/affiliate/stats:
+    get:
+      operationId: getAffiliateStats
+      summary: Get affiliate statistics
+      description: Retrieve aggregated swap statistics for an affiliate by partnerCode. Returns total swaps, volume, and fees earned. Supports optional date range filtering.
+      tags:
+      - Affiliate
+      parameters:
+      - schema:
+          type: string
+          minLength: 3
+          maxLength: 32
+          pattern: ^[a-z0-9]+$
+        required: true
+        name: partnerCode
+        in: query
+      - schema:
+          type: string
+          format: date-time
+        required: false
+        name: startDate
+        in: query
+      - schema:
+          type: string
+          format: date-time
+        required: false
+        name: endDate
+        in: query
+      responses:
+        '200':
+          description: Affiliate statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliateStatsResponse'
+        '400':
+          description: Invalid request parameters
+        '429':
+          description: Rate limit exceeded. Includes Retry-After header with seconds until reset.
+          headers:
+            Retry-After:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+            RateLimit-Limit:
+              description: Maximum requests allowed per window
+              schema:
+                type: integer
+                example: 60
+            RateLimit-Remaining:
+              description: Requests remaining in the current window
+              schema:
+                type: integer
+                example: 0
+            RateLimit-Reset:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '500':
+          description: Internal server error
+        '503':
+          description: Swap service unavailable
+        '504':
+          description: Swap service timed out
+  /v1/affiliate/swaps:
+    get:
+      operationId: getAffiliateSwaps
+      summary: Get affiliate swaps
+      description: Retrieve paginated swap history for an affiliate by partnerCode. Supports optional date range filtering.
+      tags:
+      - Affiliate
+      parameters:
+      - schema:
+          type: string
+          minLength: 3
+          maxLength: 32
+          pattern: ^[a-z0-9]+$
+        required: true
+        name: partnerCode
+        in: query
+      - schema:
+          type: string
+          format: date-time
+        required: false
+        name: startDate
+        in: query
+      - schema:
+          type: string
+          format: date-time
+        required: false
+        name: endDate
+        in: query
+      - schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        required: false
+        name: limit
+        in: query
+      - schema:
+          type: string
+          minLength: 1
+        required: false
+        name: cursor
+        in: query
+      responses:
+        '200':
+          description: Affiliate swaps
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliateSwapsResponse'
+        '400':
+          description: Invalid query parameters
+        '429':
+          description: Rate limit exceeded. Includes Retry-After header with seconds until reset.
+          headers:
+            Retry-After:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+            RateLimit-Limit:
+              description: Maximum requests allowed per window
+              schema:
+                type: integer
+                example: 60
+            RateLimit-Remaining:
+              description: Requests remaining in the current window
+              schema:
+                type: integer
+                example: 0
+            RateLimit-Reset:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '500':
+          description: Internal server error
+        '503':
+          description: Swap service unavailable
+        '504':
+          description: Swap service timed out
+  /v1/partner/{code}:
+    get:
+      operationId: resolvePartner
+      summary: Resolve a partner referral code
+      description: Resolve a partner referral code to its attribution details (partner address and bps split).
+      tags:
+      - Affiliate
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        required: true
+        name: code
+        in: path
+      responses:
+        '200':
+          description: Partner attribution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerResolution'
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: Partner code not found
+        '429':
+          description: Rate limit exceeded. Includes Retry-After header with seconds until reset.
+          headers:
+            Retry-After:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+            RateLimit-Limit:
+              description: Maximum requests allowed per window
+              schema:
+                type: integer
+                example: 60
+            RateLimit-Remaining:
+              description: Requests remaining in the current window
+              schema:
+                type: integer
+                example: 0
+            RateLimit-Reset:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '500':
+          description: Internal server error
+        '503':
+          description: Swap service unavailable
+        '504':
+          description: Swap service timed out
+components:
+  schemas:
+    AffiliateStatsResponse:
+      type: object
+      properties:
+        totalSwaps:
+          type: number
+          example: 42
+        totalVolumeUsd:
+          type: string
+          example: '12345.67'
+        totalFeesEarnedUsd:
+          type: string
+          example: '44.44'
+      required:
+      - totalSwaps
+      - totalVolumeUsd
+      - totalFeesEarnedUsd
+    AffiliateSwapsResponse:
+      type: object
+      properties:
+        swaps:
+          type: array
+          items:
+            $ref: '#/components/schemas/AffiliateSwap'
+        nextCursor:
+          type: string
+          nullable: true
+          example: swap-uuid-1234
+      required:
+      - swaps
+      - nextCursor
+    AffiliateConfig:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        walletAddress:
+          type: string
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        receiveAddress:
+          type: string
+          nullable: true
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        partnerCode:
+          type: string
+          example: mypartner
+        partnerBps:
+          type: number
+          example: 50
+        shapeshiftBps:
+          type: number
+          example: 10
+        isActive:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00.000Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00.000Z'
+      required:
+      - id
+      - walletAddress
+      - receiveAddress
+      - partnerCode
+      - partnerBps
+      - shapeshiftBps
+      - isActive
+      - createdAt
+      - updatedAt
+    PartnerResolution:
+      type: object
+      properties:
+        partnerAddress:
+          type: string
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        partnerBps:
+          type: integer
+          minimum: 0
+          example: 50
+        partnerCode:
+          type: string
+          example: mypartner
+        shapeshiftBps:
+          type: integer
+          minimum: 0
+          example: 10
+      required:
+      - partnerAddress
+      - partnerBps
+      - partnerCode
+      - shapeshiftBps
+    AffiliateSwap:
+      type: object
+      properties:
+        swapId:
+          type: string
+          example: swap-uuid-1234
+        status:
+          type: string
+          example: completed
+        sellAsset:
+          $ref: '#/components/schemas/Asset'
+        buyAsset:
+          $ref: '#/components/schemas/Asset'
+        sellAmountCryptoPrecision:
+          type: string
+          example: '1.0'
+        sellAmountUsd:
+          type: string
+          nullable: true
+          example: '1234.56'
+        buyAmountCryptoPrecision:
+          type: string
+          nullable: true
+          example: '948.0'
+        buyAmountUsd:
+          type: string
+          nullable: true
+          example: '1234.56'
+        affiliateFeeAmountUsd:
+          type: string
+          nullable: true
+          example: '3.70'
+        affiliateBps:
+          type: integer
+          minimum: 0
+          example: 60
+        partnerBps:
+          type: integer
+          nullable: true
+          minimum: 0
+          example: 20
+        shapeshiftBps:
+          type: integer
+          minimum: 0
+          example: 10
+        swapperName:
+          type: string
+          example: THORChain
+        sellTxHash:
+          type: string
+          nullable: true
+          example: '0xabc123'
+        buyTxHash:
+          type: string
+          nullable: true
+          example: '0xdef456'
+        isAffiliateVerified:
+          type: boolean
+          nullable: true
+          example: true
+        createdAt:
+          type: string
+          example: '2024-01-01T00:00:00.000Z'
+      required:
+      - swapId
+      - status
+      - sellAsset
+      - buyAsset
+      - sellAmountCryptoPrecision
+      - sellAmountUsd
+      - buyAmountCryptoPrecision
+      - buyAmountUsd
+      - affiliateFeeAmountUsd
+      - affiliateBps
+      - partnerBps
+      - shapeshiftBps
+      - swapperName
+      - sellTxHash
+      - buyTxHash
+      - isAffiliateVerified
+      - createdAt
+    Asset:
+      type: object
+      properties:
+        assetId:
+          type: string
+          example: eip155:1/slip44:60
+        chainId:
+          type: string
+          example: eip155:1
+        name:
+          type: string
+          example: Ethereum
+        symbol:
+          type: string
+          example: ETH
+        precision:
+          type: number
+          example: 18
+        color:
+          type: string
+          example: '#5C6BC0'
+        icon:
+          type: string
+          example: https://assets.coincap.io/assets/icons/eth@2x.png
+        networkName:
+          type: string
+          example: Ethereum
+        networkColor:
+          type: string
+          example: '#5C6BC0'
+        networkIcon:
+          type: string
+          example: https://assets.coincap.io/assets/icons/eth@2x.png
+        explorer:
+          type: string
+          example: https://etherscan.io
+        explorerAddressLink:
+          type: string
+          example: https://etherscan.io/address/
+        explorerTxLink:
+          type: string
+          example: https://etherscan.io/tx/
+        relatedAssetKey:
+          type: string
+          nullable: true
+      required:
+      - assetId
+      - chainId
+      - name
+      - symbol
+      - precision
+      - color
+      - icon
+      - explorer
+      - explorerAddressLink
+      - explorerTxLink
+      - relatedAssetKey
+    RateLimitError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Too many requests, please try again later
+        code:
+          type: string
+          enum:
+          - RATE_LIMIT_EXCEEDED
+          example: RATE_LIMIT_EXCEEDED
+      required:
+      - error
+      - code

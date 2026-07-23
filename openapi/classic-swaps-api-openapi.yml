@@ -1,0 +1,797 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: ShapeShift Public Affiliate Swaps API
+  description: 'The ShapeShift Public API lets you integrate multi-chain swap functionality into your application. Fetch rates from multiple DEX aggregators and bridges, build executable quotes, and track swaps across supported blockchains.
+
+
+    ## Base URL
+
+
+    ```
+
+    https://api.shapeshift.com
+
+    ```
+
+
+    All endpoints are versioned under `/v1` (e.g. `https://api.shapeshift.com/v1/swap/rates`). This interactive reference is served at `https://api.shapeshift.com/docs`, and the raw OpenAPI document at `https://api.shapeshift.com/docs/json`.
+
+
+    ## Two ways to integrate
+
+
+    1. **Swap Widget SDK** — a drop-in React component with built-in UI, wallet connection, and multi-chain support. The fastest path. See the **Swap Widget SDK** section.
+
+    2. **REST API** — call the endpoints directly and build your own UI for full control over UX. See the **REST API Guide** section, then the per-endpoint reference below.
+
+
+    ## Affiliate tracking (optional)
+
+
+    Send an `X-Partner-Code` header with your registered partner code (e.g. `your-partner-code`) on the swap endpoints to attribute swaps for affiliate revenue share. The API attributes the swap to your affiliate account and applies your configured fee (bps) automatically. All endpoints work without it — unattributed swaps use the default fee. See the [Affiliate Program guide](https://github.com/shapeshift/web/blob/develop/docs/affiliates.md) for how to obtain a code.
+
+
+    ## Asset IDs (CAIP-19)
+
+
+    Assets are identified with [CAIP-19](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-19.md): `{chainId}/{assetNamespace}:{assetReference}`
+
+
+    - Native ETH: `eip155:1/slip44:60`
+
+    - USDC on Ethereum: `eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
+
+    - Native BTC: `bip122:000000000019d6689c085ae165831e93/slip44:0`
+
+
+    Chains use [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) (e.g. `eip155:1`). Use `GET /v1/chains` and `GET /v1/assets` to discover supported values.
+
+
+    ## Errors
+
+
+    Errors return the appropriate HTTP status and a JSON body:
+
+
+    ```json
+
+    { "error": "Human-readable message", "code": "MACHINE_CODE", "details": [] }
+
+    ```
+
+
+    `code` and `details` are present where applicable (e.g. `QUOTE_NOT_FOUND`, `TX_HASH_REQUIRED`, `TX_HASH_MISMATCH`, `RATE_LIMIT_EXCEEDED`, validation `details`).
+
+
+    ## Rate limiting
+
+
+    Endpoints are rate limited per IP on a fixed 60-second window. A global limit applies across all endpoints, and individual endpoint groups (data, rates, quote, status, affiliate) have their own independent limits on top of it — so a request counts against both. When either is exceeded, the API returns `429` with code `RATE_LIMIT_EXCEEDED` and these headers:
+
+
+    - `Retry-After` — seconds until the window resets
+
+    - `RateLimit-Limit` — max requests allowed per window
+
+    - `RateLimit-Remaining` — requests remaining in the current window
+
+    - `RateLimit-Reset` — seconds until the window resets
+
+
+    Back off using `Retry-After` and avoid polling faster than necessary (see the REST API Guide for polling guidance).
+
+    '
+servers:
+- url: https://api.shapeshift.com
+- url: http://localhost:3001
+tags:
+- name: Swaps
+paths:
+  /v1/swap/quote:
+    post:
+      operationId: getSwapQuote
+      summary: Get executable quote
+      description: Get an executable quote for a swap, including transaction data. Requires a specific swapper name.
+      tags:
+      - Swaps
+      parameters:
+      - schema:
+          type: string
+        required: false
+        description: Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.
+        name: X-Partner-Code
+        in: header
+        example: vultisig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sellAssetId:
+                  type: string
+                  minLength: 1
+                  example: eip155:1/slip44:60
+                buyAssetId:
+                  type: string
+                  minLength: 1
+                  example: bip122:000000000019d6689c085ae165831e93/slip44:0
+                sellAmountCryptoBaseUnit:
+                  type: string
+                  minLength: 1
+                  example: '1000000000000000000'
+                receiveAddress:
+                  type: string
+                  minLength: 1
+                  example: bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq
+                sendAddress:
+                  type: string
+                  minLength: 1
+                  example: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+                swapperName:
+                  type: string
+                  minLength: 1
+                  example: Relay
+                slippageTolerancePercentageDecimal:
+                  type: string
+                  example: '0.01'
+                accountNumber:
+                  type: number
+                  nullable: true
+                  default: 0
+                  example: 0
+              required:
+              - sellAssetId
+              - buyAssetId
+              - sellAmountCryptoBaseUnit
+              - receiveAddress
+              - sendAddress
+              - swapperName
+      responses:
+        '200':
+          description: Swap quote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResponse'
+        '400':
+          description: Invalid request or unavailable swapper
+        '404':
+          description: No quote available
+        '429':
+          description: Rate limit exceeded. Includes Retry-After header with seconds until reset.
+          headers:
+            Retry-After:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+            RateLimit-Limit:
+              description: Maximum requests allowed per window
+              schema:
+                type: integer
+                example: 60
+            RateLimit-Remaining:
+              description: Requests remaining in the current window
+              schema:
+                type: integer
+                example: 0
+            RateLimit-Reset:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '500':
+          description: Internal server error
+  /v1/swap/rates:
+    get:
+      operationId: getSwapRates
+      summary: Get swap rates
+      description: Get informative swap rates from all available swappers. This does not create a transaction.
+      tags:
+      - Swaps
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+          example: eip155:1/slip44:60
+        required: true
+        name: sellAssetId
+        in: query
+      - schema:
+          type: string
+          minLength: 1
+          example: eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48
+        required: true
+        name: buyAssetId
+        in: query
+      - schema:
+          type: string
+          pattern: ^\d+$
+          example: '1000000000000000000'
+        required: true
+        name: sellAmountCryptoBaseUnit
+        in: query
+      - schema:
+          type: string
+          pattern: ^(?:\d+)(?:\.\d+)?$
+          example: '0.01'
+        required: false
+        name: slippageTolerancePercentageDecimal
+        in: query
+      - schema:
+          type: string
+        required: false
+        description: Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.
+        name: X-Partner-Code
+        in: header
+        example: vultisig
+      responses:
+        '200':
+          description: Swap rates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateResponse'
+        '400':
+          description: Invalid request
+        '429':
+          description: Rate limit exceeded. Includes Retry-After header with seconds until reset.
+          headers:
+            Retry-After:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+            RateLimit-Limit:
+              description: Maximum requests allowed per window
+              schema:
+                type: integer
+                example: 60
+            RateLimit-Remaining:
+              description: Requests remaining in the current window
+              schema:
+                type: integer
+                example: 0
+            RateLimit-Reset:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '500':
+          description: Internal server error
+  /v1/swap/status:
+    get:
+      operationId: getSwapStatus
+      summary: Get swap status
+      description: Look up the current status of a swap by its quote ID. Pass txHash on the first call after broadcasting to bind it to the quote and start tracking. Subsequent calls can omit txHash.
+      tags:
+      - Swaps
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        required: true
+        name: quoteId
+        in: query
+      - schema:
+          type: string
+          minLength: 1
+          maxLength: 128
+        required: false
+        name: txHash
+        in: query
+      - schema:
+          type: string
+        required: false
+        description: Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.
+        name: X-Partner-Code
+        in: header
+        example: vultisig
+      responses:
+        '200':
+          description: Swap status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwapStatusResponse'
+        '400':
+          description: Invalid request parameters or txHash required to begin tracking
+        '404':
+          description: Quote not found or expired
+        '409':
+          description: Transaction hash mismatch
+        '429':
+          description: Rate limit exceeded. Includes Retry-After header with seconds until reset.
+          headers:
+            Retry-After:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+            RateLimit-Limit:
+              description: Maximum requests allowed per window
+              schema:
+                type: integer
+                example: 60
+            RateLimit-Remaining:
+              description: Requests remaining in the current window
+              schema:
+                type: integer
+                example: 0
+            RateLimit-Reset:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '500':
+          description: Internal server error
+        '503':
+          description: Swap service unavailable
+        '504':
+          description: Swap service timed out
+components:
+  schemas:
+    RateResponse:
+      type: object
+      properties:
+        rates:
+          type: array
+          items:
+            type: object
+            properties:
+              swapperName:
+                type: string
+              rate:
+                type: string
+              buyAmountCryptoBaseUnit:
+                type: string
+              sellAmountCryptoBaseUnit:
+                type: string
+              steps:
+                type: number
+              estimatedExecutionTimeMs:
+                type: number
+              priceImpactPercentageDecimal:
+                type: string
+              affiliateBps:
+                type: string
+                description: Total on-chain fee in bps.
+                example: '60'
+              partnerBps:
+                type: string
+                description: Partner share in bps.
+                example: '50'
+              shapeshiftBps:
+                type: string
+                description: ShapeShift platform fee in bps.
+                example: '10'
+              networkFeeCryptoBaseUnit:
+                type: string
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - code
+                - message
+            required:
+            - swapperName
+            - rate
+            - buyAmountCryptoBaseUnit
+            - sellAmountCryptoBaseUnit
+            - steps
+            - affiliateBps
+            - shapeshiftBps
+        timestamp:
+          type: number
+        expiresAt:
+          type: number
+      required:
+      - rates
+      - timestamp
+      - expiresAt
+    SwapStatusResponse:
+      type: object
+      properties:
+        quoteId:
+          type: string
+          format: uuid
+        txHash:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - submitted
+          - confirmed
+          - failed
+        swapperName:
+          type: string
+        sellAssetId:
+          type: string
+        buyAssetId:
+          type: string
+        sellAmountCryptoBaseUnit:
+          type: string
+        buyAmountAfterFeesCryptoBaseUnit:
+          type: string
+        partnerAddress:
+          type: string
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        affiliateBps:
+          type: string
+          description: Total on-chain fee in bps.
+          example: '60'
+        partnerBps:
+          type: string
+          description: Partner share in bps.
+          example: '50'
+        shapeshiftBps:
+          type: string
+          description: ShapeShift platform fee in bps.
+          example: '10'
+        registeredAt:
+          type: number
+        buyTxHash:
+          type: string
+        isAffiliateVerified:
+          type: boolean
+      required:
+      - quoteId
+      - status
+      - swapperName
+      - sellAssetId
+      - buyAssetId
+      - sellAmountCryptoBaseUnit
+      - buyAmountAfterFeesCryptoBaseUnit
+      - affiliateBps
+      - shapeshiftBps
+    QuoteStep:
+      type: object
+      properties:
+        sellAsset:
+          $ref: '#/components/schemas/Asset'
+        buyAsset:
+          $ref: '#/components/schemas/Asset'
+        sellAmountCryptoBaseUnit:
+          type: string
+          example: '1000000000000000000'
+        buyAmountAfterFeesCryptoBaseUnit:
+          type: string
+          example: '995000000'
+        allowanceContract:
+          type: string
+          example: '0xdef1c0ded9bec7f1a1670819833240f027b25eff'
+        estimatedExecutionTimeMs:
+          type: number
+          example: 60000
+        source:
+          type: string
+          example: 0x
+        transactionData:
+          oneOf:
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - evm
+                example: evm
+              chainId:
+                type: number
+                example: 1
+              to:
+                type: string
+                example: '0xdef1c0ded9bec7f1a1670819833240f027b25eff'
+              data:
+                type: string
+                example: 0x...
+              value:
+                type: string
+                example: '1000000000000000000'
+              gasLimit:
+                type: string
+                example: '300000'
+              signatureRequired:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - permit2
+                  eip712:
+                    type: object
+                    additionalProperties:
+                      nullable: true
+                required:
+                - type
+                - eip712
+            required:
+            - type
+            - chainId
+            - to
+            - data
+            - value
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - solana
+                example: solana
+              instructions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    programId:
+                      type: string
+                    keys:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          pubkey:
+                            type: string
+                          isSigner:
+                            type: boolean
+                          isWritable:
+                            type: boolean
+                        required:
+                        - pubkey
+                        - isSigner
+                        - isWritable
+                    data:
+                      type: string
+                  required:
+                  - programId
+                  - keys
+                  - data
+              addressLookupTableAddresses:
+                type: array
+                items:
+                  type: string
+            required:
+            - type
+            - instructions
+            - addressLookupTableAddresses
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - utxo_psbt
+                example: utxo_psbt
+              psbt:
+                type: string
+              opReturnData:
+                type: string
+              depositAddress:
+                type: string
+              value:
+                type: string
+            required:
+            - type
+            - psbt
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - utxo_deposit
+                example: utxo_deposit
+              depositAddress:
+                type: string
+              memo:
+                type: string
+              value:
+                type: string
+            required:
+            - type
+            - depositAddress
+            - memo
+            - value
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - cosmos
+                example: cosmos
+              chainId:
+                type: string
+              to:
+                type: string
+              value:
+                type: string
+              memo:
+                type: string
+            required:
+            - type
+            - chainId
+            - to
+            - value
+      required:
+      - sellAsset
+      - buyAsset
+      - sellAmountCryptoBaseUnit
+      - buyAmountAfterFeesCryptoBaseUnit
+      - allowanceContract
+      - source
+    Asset:
+      type: object
+      properties:
+        assetId:
+          type: string
+          example: eip155:1/slip44:60
+        chainId:
+          type: string
+          example: eip155:1
+        name:
+          type: string
+          example: Ethereum
+        symbol:
+          type: string
+          example: ETH
+        precision:
+          type: number
+          example: 18
+        color:
+          type: string
+          example: '#5C6BC0'
+        icon:
+          type: string
+          example: https://assets.coincap.io/assets/icons/eth@2x.png
+        networkName:
+          type: string
+          example: Ethereum
+        networkColor:
+          type: string
+          example: '#5C6BC0'
+        networkIcon:
+          type: string
+          example: https://assets.coincap.io/assets/icons/eth@2x.png
+        explorer:
+          type: string
+          example: https://etherscan.io
+        explorerAddressLink:
+          type: string
+          example: https://etherscan.io/address/
+        explorerTxLink:
+          type: string
+          example: https://etherscan.io/tx/
+        relatedAssetKey:
+          type: string
+          nullable: true
+      required:
+      - assetId
+      - chainId
+      - name
+      - symbol
+      - precision
+      - color
+      - icon
+      - explorer
+      - explorerAddressLink
+      - explorerTxLink
+      - relatedAssetKey
+    RateLimitError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Too many requests, please try again later
+        code:
+          type: string
+          enum:
+          - RATE_LIMIT_EXCEEDED
+          example: RATE_LIMIT_EXCEEDED
+      required:
+      - error
+      - code
+    QuoteResponse:
+      type: object
+      properties:
+        quoteId:
+          type: string
+          format: uuid
+        swapperName:
+          type: string
+          example: 0x
+        rate:
+          type: string
+          example: '0.995'
+        sellAsset:
+          $ref: '#/components/schemas/Asset'
+        buyAsset:
+          $ref: '#/components/schemas/Asset'
+        sellAmountCryptoBaseUnit:
+          type: string
+        buyAmountBeforeFeesCryptoBaseUnit:
+          type: string
+        buyAmountAfterFeesCryptoBaseUnit:
+          type: string
+        affiliateBps:
+          type: string
+          description: Total on-chain fee in bps.
+          example: '60'
+        partnerBps:
+          type: string
+          description: Partner share in bps.
+          example: '50'
+        shapeshiftBps:
+          type: string
+          description: ShapeShift platform fee in bps.
+          example: '10'
+        slippageTolerancePercentageDecimal:
+          type: string
+          example: '0.01'
+        networkFeeCryptoBaseUnit:
+          type: string
+          example: '23000'
+        approval:
+          type: object
+          properties:
+            isRequired:
+              type: boolean
+              example: true
+            spender:
+              type: string
+              example: '0xdef1c0ded9bec7f1a1670819833240f027b25eff'
+            approvalTx:
+              type: object
+              properties:
+                to:
+                  type: string
+                  example: '0xdef1c0ded9bec7f1a1670819833240f027b25eff'
+                data:
+                  type: string
+                  example: 0x
+                value:
+                  type: string
+                  example: '0'
+              required:
+              - to
+              - data
+              - value
+          required:
+          - isRequired
+          - spender
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteStep'
+        expiresAt:
+          type: number
+      required:
+      - quoteId
+      - swapperName
+      - rate
+      - sellAsset
+      - buyAsset
+      - sellAmountCryptoBaseUnit
+      - buyAmountBeforeFeesCryptoBaseUnit
+      - buyAmountAfterFeesCryptoBaseUnit
+      - affiliateBps
+      - shapeshiftBps
+      - approval
+      - steps
+      - expiresAt

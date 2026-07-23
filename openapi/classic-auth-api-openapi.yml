@@ -1,0 +1,237 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: ShapeShift Public Affiliate Auth API
+  description: 'The ShapeShift Public API lets you integrate multi-chain swap functionality into your application. Fetch rates from multiple DEX aggregators and bridges, build executable quotes, and track swaps across supported blockchains.
+
+
+    ## Base URL
+
+
+    ```
+
+    https://api.shapeshift.com
+
+    ```
+
+
+    All endpoints are versioned under `/v1` (e.g. `https://api.shapeshift.com/v1/swap/rates`). This interactive reference is served at `https://api.shapeshift.com/docs`, and the raw OpenAPI document at `https://api.shapeshift.com/docs/json`.
+
+
+    ## Two ways to integrate
+
+
+    1. **Swap Widget SDK** — a drop-in React component with built-in UI, wallet connection, and multi-chain support. The fastest path. See the **Swap Widget SDK** section.
+
+    2. **REST API** — call the endpoints directly and build your own UI for full control over UX. See the **REST API Guide** section, then the per-endpoint reference below.
+
+
+    ## Affiliate tracking (optional)
+
+
+    Send an `X-Partner-Code` header with your registered partner code (e.g. `your-partner-code`) on the swap endpoints to attribute swaps for affiliate revenue share. The API attributes the swap to your affiliate account and applies your configured fee (bps) automatically. All endpoints work without it — unattributed swaps use the default fee. See the [Affiliate Program guide](https://github.com/shapeshift/web/blob/develop/docs/affiliates.md) for how to obtain a code.
+
+
+    ## Asset IDs (CAIP-19)
+
+
+    Assets are identified with [CAIP-19](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-19.md): `{chainId}/{assetNamespace}:{assetReference}`
+
+
+    - Native ETH: `eip155:1/slip44:60`
+
+    - USDC on Ethereum: `eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
+
+    - Native BTC: `bip122:000000000019d6689c085ae165831e93/slip44:0`
+
+
+    Chains use [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) (e.g. `eip155:1`). Use `GET /v1/chains` and `GET /v1/assets` to discover supported values.
+
+
+    ## Errors
+
+
+    Errors return the appropriate HTTP status and a JSON body:
+
+
+    ```json
+
+    { "error": "Human-readable message", "code": "MACHINE_CODE", "details": [] }
+
+    ```
+
+
+    `code` and `details` are present where applicable (e.g. `QUOTE_NOT_FOUND`, `TX_HASH_REQUIRED`, `TX_HASH_MISMATCH`, `RATE_LIMIT_EXCEEDED`, validation `details`).
+
+
+    ## Rate limiting
+
+
+    Endpoints are rate limited per IP on a fixed 60-second window. A global limit applies across all endpoints, and individual endpoint groups (data, rates, quote, status, affiliate) have their own independent limits on top of it — so a request counts against both. When either is exceeded, the API returns `429` with code `RATE_LIMIT_EXCEEDED` and these headers:
+
+
+    - `Retry-After` — seconds until the window resets
+
+    - `RateLimit-Limit` — max requests allowed per window
+
+    - `RateLimit-Remaining` — requests remaining in the current window
+
+    - `RateLimit-Reset` — seconds until the window resets
+
+
+    Back off using `Retry-After` and avoid polling faster than necessary (see the REST API Guide for polling guidance).
+
+    '
+servers:
+- url: https://api.shapeshift.com
+- url: http://localhost:3001
+tags:
+- name: Auth
+paths:
+  /v1/auth/siwe/nonce:
+    post:
+      operationId: siweNonce
+      summary: Get SIWE nonce
+      description: Request a nonce for Sign-In with Ethereum (SIWE) authentication.
+      tags:
+      - Auth
+      responses:
+        '200':
+          description: SIWE nonce
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SiweNonceResponse'
+        '429':
+          description: Rate limit exceeded. Includes Retry-After header with seconds until reset.
+          headers:
+            Retry-After:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+            RateLimit-Limit:
+              description: Maximum requests allowed per window
+              schema:
+                type: integer
+                example: 60
+            RateLimit-Remaining:
+              description: Requests remaining in the current window
+              schema:
+                type: integer
+                example: 0
+            RateLimit-Reset:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '500':
+          description: Internal server error
+        '503':
+          description: Swap service unavailable
+        '504':
+          description: Swap service timed out
+  /v1/auth/siwe/verify:
+    post:
+      operationId: siweVerify
+      summary: Verify SIWE signature
+      description: Verify a Sign-In with Ethereum (SIWE) message and signature. Returns a JWT token on success.
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                signature:
+                  type: string
+              required:
+              - message
+              - signature
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SiweVerifyResponse'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Invalid signature
+        '429':
+          description: Rate limit exceeded. Includes Retry-After header with seconds until reset.
+          headers:
+            Retry-After:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+            RateLimit-Limit:
+              description: Maximum requests allowed per window
+              schema:
+                type: integer
+                example: 60
+            RateLimit-Remaining:
+              description: Requests remaining in the current window
+              schema:
+                type: integer
+                example: 0
+            RateLimit-Reset:
+              description: Seconds until the rate limit window resets
+              schema:
+                type: integer
+                example: 30
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '500':
+          description: Internal server error
+        '503':
+          description: Swap service unavailable
+        '504':
+          description: Swap service timed out
+components:
+  schemas:
+    SiweVerifyResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        address:
+          type: string
+          example: '0x1234567890123456789012345678901234567890'
+      required:
+      - token
+      - address
+    RateLimitError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Too many requests, please try again later
+        code:
+          type: string
+          enum:
+          - RATE_LIMIT_EXCEEDED
+          example: RATE_LIMIT_EXCEEDED
+      required:
+      - error
+      - code
+    SiweNonceResponse:
+      type: object
+      properties:
+        nonce:
+          type: string
+          example: abcdef123456
+      required:
+      - nonce
