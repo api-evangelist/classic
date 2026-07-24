@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/classic-shapeshift-openapi-original.json
+notes: >-
+  Derived from the OpenAPI plus live probes. Versioning is URI-path (/v1). No
+  public status page (status.shapeshift.com does not resolve), no published
+  deprecation policy, and no Sunset/Deprecation header support was found. The
+  legacy "Classic"/OG interface (classic.shapeshift.com) 301-redirects to
+  og.shapeshift.com — a de facto retirement of the old swap UI in favor of the
+  current app and Public API.
+versioning:
+  scheme: uri-path
+  current: v1
+  base_path: /v1
+deprecation:
+  policy_url: null
+  sunset_header: false
+sla:
+  url: null
+status_page: null
+deprecated_operations: []
+legacy_surface:
+  classic_interface: https://classic.shapeshift.com/#/coins
+  redirects_to: https://og.shapeshift.com/
+  note: The "Classic" interface is the legacy/OG ShapeShift swap UI, now redirected.

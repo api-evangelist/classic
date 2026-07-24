@@ -1,0 +1,30 @@
+# ShapeShift (Classic)
+
+> ShapeShift is a self-custody, multichain crypto platform and DEX aggregator. "Classic" (a.k.a. OG) is the legacy ShapeShift swap interface (classic.shapeshift.com, now redirecting to og.shapeshift.com). The ShapeShift Public API exposes supported assets and chains, indicative rates and executable swap quotes, swap status tracking, and an affiliate/partner program authenticated with Sign-In With Ethereum (EIP-4361). Backed by Pantera Capital.
+
+## APIs
+
+- [ShapeShift Public API reference](https://api.shapeshift.com/docs): Scalar-rendered reference for the v1 API.
+- [OpenAPI (JSON)](https://api.shapeshift.com/docs/json): OpenAPI 3.0.0, 16 operations across Affiliate, Supported Assets, Auth (SIWE), Supported Chains, and Swaps.
+
+## Specs & artifacts
+
+- [OpenAPI (local copy)](openapi/classic-shapeshift-openapi-original.json)
+- [Authentication profile](authentication/classic-authentication.yml): SIWE (EIP-4361) -> JWT bearer; public reads; X-Partner-Code attribution.
+- [Conventions](conventions/classic-conventions.yml): pagination (cursor + offset), rate-limit headers, CAIP identifiers, error envelope.
+- [Error catalog](errors/classic-problem-types.yml)
+- [Data model](data-model/classic-data-model.yml): Asset, Chain, Affiliate, Quote, SwapStatus, Partner.
+- [Conformance](conformance/classic-conformance.yml): OpenAPI 3.0, EIP-4361, CAIP-2/CAIP-19, JWT.
+- [Lifecycle](lifecycle/classic-lifecycle.yml): URI-path versioning (/v1).
+- [MCP tool candidates](mcp/classic-mcp.yml)
+- [Agent skills](skills/_index.yml)
+
+## Docs & links
+
+- [ShapeShift](https://og.shapeshift.com/)
+- [GitHub organization](https://github.com/shapeshift)
+- [Packages (@shapeshiftoss on npm)](https://www.npmjs.com/org/shapeshiftoss)
+- [Blog](https://shapeshift.com/blog)
+- [Support](https://shapeshift.com/support)
+- [Terms of Service](https://shapeshift.com/terms-of-service)
+- [Privacy Policy](https://shapeshift.com/privacy-policy)

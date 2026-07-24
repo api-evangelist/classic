@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for ShapeShift Public API
+  version: 1.0.0
+extends: openapi/classic-shapeshift-openapi-original.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: true
+      x-apievangelist-provider: classic
+      x-apievangelist-notes: >-
+        ShapeShift Public API (Classic / OG legacy swap surface). Auth via SIWE
+        (EIP-4361) -> JWT bearer; public reads. Asset/chain identifiers use
+        CAIP-19/CAIP-2. Errors use a custom { error, code } envelope (not RFC 9457).
+  - target: $.info
+    update:
+      x-authentication: authentication/classic-authentication.yml
+      x-conventions: conventions/classic-conventions.yml
+      x-error-catalog: errors/classic-problem-types.yml
+      x-data-model: data-model/classic-data-model.yml

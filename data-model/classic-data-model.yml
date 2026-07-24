@@ -1,0 +1,63 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/classic-shapeshift-openapi-original.json
+notes: Entity graph derived from OpenAPI component schemas and id-reference fields.
+entities:
+  - name: Asset
+    id_field: assetId
+    id_format: CAIP-19 (eip155:1/slip44:60)
+    key_fields: [assetId, chainId, name, symbol, precision, color, icon]
+    belongs_to: [Chain]
+  - name: Chain
+    id_field: chainId
+    id_format: CAIP-2 (eip155:1)
+    key_fields: [chainId, name]
+    has_many: [Asset]
+  - name: Affiliate
+    id_field: address
+    id_format: EVM address
+    key_fields: [address, partnerCode, config]
+    has_many: [AffiliateSwap]
+  - name: AffiliateSwap
+    key_fields: [partnerCode, sellAsset, buyAsset, amount, timestamp]
+    belongs_to: [Affiliate]
+  - name: Partner
+    id_field: code
+    key_fields: [code, address]
+  - name: Quote
+    id_field: quoteId
+    id_format: uuid
+    key_fields: [quoteId, swapperName, rate, sellAsset, buyAsset, sellAmountCryptoBaseUnit, buyAmountAfterFeesCryptoBaseUnit, affiliateBps]
+    references: [Asset]
+  - name: SwapStatus
+    key_fields: [quoteId, txHash, status]
+    references: [Quote]
+relationships:
+  - from: Asset
+    to: Chain
+    type: belongs_to
+    via: chainId
+  - from: Chain
+    to: Asset
+    type: has_many
+    via: chainId
+  - from: Affiliate
+    to: AffiliateSwap
+    type: has_many
+    via: address
+  - from: AffiliateSwap
+    to: Affiliate
+    type: belongs_to
+    via: partnerCode
+  - from: Quote
+    to: Asset
+    type: has_one
+    via: sellAsset
+  - from: Quote
+    to: Asset
+    type: has_one
+    via: buyAsset
+  - from: SwapStatus
+    to: Quote
+    type: belongs_to
+    via: quoteId

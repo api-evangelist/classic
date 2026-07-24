@@ -1,0 +1,12 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/classic-shapeshift-openapi-original.json
+skills:
+  - file: classic-swap-quote.md
+    name: Get and track a ShapeShift swap
+    api: openapi/classic-shapeshift-openapi-original.json
+    operations: [listAssets, getAssetById, getSwapRates, getSwapQuote, getSwapStatus]
+  - file: classic-affiliate-onboarding.md
+    name: Onboard a ShapeShift affiliate and read stats
+    api: openapi/classic-shapeshift-openapi-original.json
+    operations: [siweNonce, siweVerify, createAffiliate, getAffiliate, getAffiliateStats, getAffiliateSwaps]

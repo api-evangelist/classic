@@ -1,0 +1,29 @@
+generated: '2026-07-18'
+method: searched
+source: live probes of /.well-known/ on ShapeShift hosts
+notes: >-
+  No /.well-known/ discovery documents are published. classic.shapeshift.com
+  (the legacy "Classic"/OG interface) 301-redirects all /.well-known/ paths to
+  og.shapeshift.com; the primary API host api.shapeshift.com and shapeshift.com
+  return no discovery documents.
+hosts:
+  - host: https://classic.shapeshift.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 301
+        note: redirects to https://og.shapeshift.com/
+      - path: /.well-known/openid-configuration
+        status: 301
+      - path: /.well-known/oauth-authorization-server
+        status: 301
+      - path: /.well-known/api-catalog
+        status: 301
+      - path: /.well-known/ai-plugin.json
+        status: 301
+  - host: https://shapeshift.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+documents: []

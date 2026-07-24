@@ -1,8 +1,14 @@
 aid: classic
 name: Classic
-description: 'Classic is a company surfaced as a portfolio company of pantera-capital and added to the
-  API Evangelist network as a stub for enrichment. Sector: crypto. This profile is a lead awaiting the
-  enrichment pipeline.'
+description: >-
+  Classic (a.k.a. "OG") is the legacy ShapeShift crypto swap interface at
+  classic.shapeshift.com, now redirecting to og.shapeshift.com. ShapeShift is a
+  self-custody, multichain crypto platform and DEX aggregator. Its Public API
+  (api.shapeshift.com) exposes supported assets and chains (identified with
+  CAIP-19/CAIP-2), indicative swap rates and executable swap quotes, swap-status
+  tracking, and an affiliate/partner program authenticated with Sign-In With
+  Ethereum (EIP-4361, returning a JWT bearer token). Surfaced as a portfolio
+  company of Pantera Capital and enriched into the API Evangelist network.
 url: https://raw.githubusercontent.com/api-evangelist/classic/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,13 +16,92 @@ x-backed-by:
 - pantera-capital
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
+image: https://github.com/shapeshift.png
 tags:
 - Company
 - Crypto
-apis: []
+- Cryptocurrency
+- DEX Aggregator
+- Swaps
+- Blockchain
+- Wallet
+- Self-Custody
+apis:
+- aid: classic:classic-affiliate-api
+  name: Classic Affiliate API
+  description: The Affiliate API from Classic — 5 operation(s) for affiliate.
+  humanURL: https://api.shapeshift.com/docs
+  baseURL: https://api.shapeshift.com
+  tags:
+  - Affiliate
+  properties:
+  - type: OpenAPI
+    url: openapi/classic-affiliate-api-openapi.yml
+  - type: APIReference
+    url: https://api.shapeshift.com/docs
+- aid: classic:classic-auth-api
+  name: Classic Auth API
+  description: The Auth API from Classic — 2 operation(s) for auth.
+  humanURL: https://api.shapeshift.com/docs
+  baseURL: https://api.shapeshift.com
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/classic-auth-api-openapi.yml
+  - type: APIReference
+    url: https://api.shapeshift.com/docs
+- aid: classic:classic-supported-assets-api
+  name: Classic Supported Assets API
+  description: The Supported Assets API from Classic — 3 operation(s) for supported assets.
+  humanURL: https://api.shapeshift.com/docs
+  baseURL: https://api.shapeshift.com
+  tags:
+  - Supported Assets
+  properties:
+  - type: OpenAPI
+    url: openapi/classic-supported-assets-api-openapi.yml
+  - type: APIReference
+    url: https://api.shapeshift.com/docs
+- aid: classic:classic-supported-chains-api
+  name: Classic Supported Chains API
+  description: The Supported Chains API from Classic — 2 operation(s) for supported chains.
+  humanURL: https://api.shapeshift.com/docs
+  baseURL: https://api.shapeshift.com
+  tags:
+  - Supported Chains
+  properties:
+  - type: OpenAPI
+    url: openapi/classic-supported-chains-api-openapi.yml
+  - type: APIReference
+    url: https://api.shapeshift.com/docs
+- aid: classic:classic-swaps-api
+  name: Classic Swaps API
+  description: The Swaps API from Classic — 3 operation(s) for swaps.
+  humanURL: https://api.shapeshift.com/docs
+  baseURL: https://api.shapeshift.com
+  tags:
+  - Swaps
+  properties:
+  - type: OpenAPI
+    url: openapi/classic-swaps-api-openapi.yml
+  - type: APIReference
+    url: https://api.shapeshift.com/docs
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -24,4 +109,55 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://classic.shapeshift.com/#/coins
+  url: https://og.shapeshift.com/
+- type: DeveloperPortal
+  url: https://api.shapeshift.com/docs
+- type: Documentation
+  url: https://api.shapeshift.com/docs
+- type: APIReference
+  url: https://api.shapeshift.com/docs
+- type: GitHubOrganization
+  url: https://github.com/shapeshift
+- type: Blog
+  url: https://shapeshift.com/blog
+- type: Support
+  url: https://shapeshift.com/support
+- type: TermsOfService
+  url: https://shapeshift.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://shapeshift.com/privacy-policy
+- type: OpenAPI
+  url: openapi/classic-shapeshift-openapi-original.json
+- type: Overlay
+  url: overlays/classic-shapeshift-overlay.yaml
+- type: Authentication
+  url: authentication/classic-authentication.yml
+- type: Conventions
+  url: conventions/classic-conventions.yml
+- type: ErrorCatalog
+  url: errors/classic-problem-types.yml
+- type: Conformance
+  url: conformance/classic-conformance.yml
+- type: Lifecycle
+  url: lifecycle/classic-lifecycle.yml
+- type: DataModel
+  url: data-model/classic-data-model.yml
+- type: DomainSecurity
+  url: security/classic-domain-security.yml
+- type: Packages
+  url: packages/classic-packages.yml
+- type: SDKs
+  url: packages/classic-packages.yml
+- type: WellKnown
+  url: well-known/classic-well-known.yml
+- type: MCPServer
+  url: mcp/classic-mcp.yml
+- type: LLMsTxt
+  url: llms/classic-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

@@ -1,0 +1,39 @@
+generated: '2026-07-18'
+method: searched
+source: https://www.npmjs.com/org/shapeshiftoss
+notes: >-
+  First-party ShapeShift (@shapeshiftoss) TypeScript libraries published to npm.
+  These are the official client/SDK stack behind the ShapeShift app and the
+  ShapeShift Public API surface (CAIP asset identifiers, the unchained multichain
+  client, hardware-wallet integration, and shared types). No dedicated generated
+  client is published for the api.shapeshift.com Public API; these are the
+  official libraries developers use against the ShapeShift stack.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@shapeshiftoss/caip"
+    url: https://www.npmjs.com/package/@shapeshiftoss/caip
+    install: npm install @shapeshiftoss/caip
+    description: CAIP (CAIP-2 chainId / CAIP-19 assetId) implementation used by the API's asset and chain identifiers.
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@shapeshiftoss/unchained-client"
+    url: https://www.npmjs.com/package/@shapeshiftoss/unchained-client
+    install: npm install @shapeshiftoss/unchained-client
+    description: TypeScript axios client for the ShapeShift unchained multichain backend interface.
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@shapeshiftoss/hdwallet-core"
+    url: https://www.npmjs.com/package/@shapeshiftoss/hdwallet-core
+    install: npm install @shapeshiftoss/hdwallet-core
+    description: Core of the hdwallet library for interacting with hardware/software wallets from JS/TS.
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@shapeshiftoss/types"
+    url: https://www.npmjs.com/package/@shapeshiftoss/types
+    install: npm install @shapeshiftoss/types
+    description: Common TypeScript types shared across the ShapeShift package stack.
+    official: true

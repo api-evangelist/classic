@@ -1,0 +1,46 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/classic-shapeshift-openapi-original.json
+format: custom
+notes: >-
+  Derived from the ShapeShift Public API OpenAPI response codes. The API does not
+  use RFC 9457 application/problem+json. The documented error envelope is a plain
+  JSON object { "error": string, "code": string } (see the RateLimitError schema);
+  most non-2xx responses carry only an HTTP status + description.
+envelope:
+  shape: '{ "error": string, "code": string }'
+  schema: openapi/classic-shapeshift-openapi-original.json#/components/schemas/RateLimitError
+problems:
+  - status: 400
+    title: Invalid request
+    description: Invalid request body or query parameters.
+  - status: 401
+    title: Unauthorized
+    description: Missing or invalid SIWE JWT bearer token.
+    source_operations: [createAffiliate, updateAffiliate, siweVerify]
+  - status: 403
+    title: Forbidden
+    description: Authenticated principal is not permitted to modify this affiliate.
+    source_operations: [createAffiliate, updateAffiliate]
+  - status: 404
+    title: Not found
+    description: Requested resource (affiliate, asset, partner, quote) does not exist.
+    source_operations: [getAffiliate, getAssetById, resolvePartner, getSwapQuote, getSwapStatus]
+  - status: 409
+    title: Conflict
+    description: Resource already exists or is in a conflicting state (e.g. affiliate already registered; swap status conflict).
+    source_operations: [createAffiliate, getSwapStatus]
+  - status: 429
+    code: RATE_LIMIT_EXCEEDED
+    title: Rate limit exceeded
+    description: Too many requests. Includes Retry-After (seconds) and RateLimit-* headers.
+    remediation: Honor Retry-After; back off and retry.
+  - status: 500
+    title: Internal server error
+    description: Unexpected server error.
+  - status: 503
+    title: Service unavailable
+    description: Upstream/service temporarily unavailable.
+  - status: 504
+    title: Gateway timeout
+    description: Upstream request timed out.

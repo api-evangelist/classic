@@ -1,0 +1,22 @@
+{
+  "provider": "classic",
+  "sources": [
+    "classic-affiliate-api-openapi.yml",
+    "classic-auth-api-openapi.yml",
+    "classic-supported-assets-api-openapi.yml",
+    "classic-supported-chains-api-openapi.yml",
+    "classic-swaps-api-openapi.yml"
+  ],
+  "outputs": [
+    "classic-affiliate-api-openapi.yml",
+    "classic-auth-api-openapi.yml",
+    "classic-supported-assets-api-openapi.yml",
+    "classic-supported-chains-api-openapi.yml",
+    "classic-swaps-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

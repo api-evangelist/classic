@@ -1,0 +1,42 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/classic-shapeshift-openapi-original.json
+notes: Cross-cutting request/response semantics derived from the ShapeShift Public API OpenAPI.
+authentication:
+  style: SIWE (EIP-4361) -> JWT bearer; public reads
+  see: authentication/classic-authentication.yml
+idempotency:
+  supported: false
+  note: No Idempotency-Key header or parameter is declared in the OpenAPI; swap quotes are re-fetchable and priced at request time.
+pagination:
+  styles:
+    - name: cursor
+      applies_to: [getAffiliateSwaps]
+      params: [limit, cursor]
+    - name: offset
+      applies_to: [listAssets]
+      params: [limit, offset]
+partner_attribution:
+  header: X-Partner-Code
+  applies_to: [getSwapQuote, getSwapRates, getSwapStatus]
+rate_limiting:
+  status_code: 429
+  error_code: RATE_LIMIT_EXCEEDED
+  headers:
+    - Retry-After
+    - RateLimit-Limit
+    - RateLimit-Remaining
+  see: conventions/classic-conventions.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  base_path: /v1
+error_envelope:
+  format: custom
+  shape: '{ "error": string, "code": string }'
+  rfc9457: false
+  see: errors/classic-problem-types.yml
+identifiers:
+  asset_id: CAIP-19 (e.g. eip155:1/slip44:60)
+  chain_id: CAIP-2 (e.g. eip155:1)
+  amounts: crypto base units as decimal strings (e.g. sellAmountCryptoBaseUnit)

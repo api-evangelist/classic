@@ -1,0 +1,33 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/classic-shapeshift-openapi-original.json
+notes: >-
+  Standards conformance derived from the ShapeShift Public API OpenAPI. No
+  published compliance-certification program (SOC 2 / ISO 27001 / PCI) was found,
+  so no Compliance pointer is emitted.
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: OpenAPI 3.0.0 document published at https://api.shapeshift.com/docs/json
+  - id: eip-4361-siwe
+    conforms: true
+    evidence: Auth via Sign-In With Ethereum (siweNonce/siweVerify operations)
+  - id: caip-2-chain-id
+    conforms: true
+    evidence: chainId fields use CAIP-2 format (e.g. eip155:1)
+  - id: caip-19-asset-id
+    conforms: true
+    evidence: assetId fields use CAIP-19 format (e.g. eip155:1/slip44:60)
+  - id: jwt
+    conforms: true
+    evidence: siweVerify returns a JWT bearer token
+  - id: ietf-ratelimit-headers
+    conforms: true
+    evidence: 429 responses carry RateLimit-Limit / RateLimit-Remaining / Retry-After headers
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: errors use a custom { error, code } envelope, not application/problem+json
+  - id: oauth2
+    conforms: false
+  - id: oidc
+    conforms: false
