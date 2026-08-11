@@ -127,7 +127,7 @@ common:
 - type: PrivacyPolicy
   url: https://shapeshift.com/privacy-policy
 - type: OpenAPI
-  url: openapi/classic-shapeshift-openapi-original.json
+  url: openapi/_original/classic-shapeshift-openapi-original.json
 - type: Overlay
   url: overlays/classic-shapeshift-overlay.yaml
 - type: Authentication
