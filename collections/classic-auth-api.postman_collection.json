@@ -1,0 +1,633 @@
+{
+  "item": [
+    {
+      "id": "1a68b127-23b7-4d52-9fd9-b90a6e226923",
+      "name": "Auth",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b437cc4d-40fd-4283-9b3d-11a7d6df0b0c",
+          "name": "Get SIWE nonce",
+          "request": {
+            "name": "Get SIWE nonce",
+            "description": {
+              "content": "Request a nonce for Sign-In with Ethereum (SIWE) authentication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "siwe",
+                "nonce"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c683d5c1-f168-4f46-89b4-6a983464e1be",
+              "name": "SIWE nonce",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "nonce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nonce\": \"abcdef123456\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d1678b7-fd95-4f6c-9aab-5520e87c69de",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "nonce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f9377d6-0f68-4a6c-823e-cde66258a12f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "nonce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dce54327-31dd-4598-b633-2f03119af73d",
+              "name": "Swap service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "nonce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cee459fa-2b2f-4b92-8410-851dbe6dd076",
+              "name": "Swap service timed out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "nonce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "744aa20b-7cbc-4ad7-9e16-2c42b28b59fa",
+          "name": "Verify SIWE signature",
+          "request": {
+            "name": "Verify SIWE signature",
+            "description": {
+              "content": "Verify a Sign-In with Ethereum (SIWE) message and signature. Returns a JWT token on success.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "siwe",
+                "verify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aff285a5-7975-4ea0-88f0-215feacdfe15",
+              "name": "Authentication successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"address\": \"0x1234567890123456789012345678901234567890\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d1ec220-6c3a-46be-87d3-ec4128f42ecc",
+              "name": "Invalid request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78054759-04df-4d27-b91a-6f0d2e6a24df",
+              "name": "Invalid signature",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d975427c-25c3-45df-a880-bd5fa3098ebd",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bc9e4db-6ca3-4126-8b3f-76535b946b6c",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5567a5ab-c575-40dc-a8f9-cc7f95d74d17",
+              "name": "Swap service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3775f09d-db98-42cb-becc-08d5ce78e85e",
+              "name": "Swap service timed out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "siwe",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.shapeshift.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1a6218f3-a9c9-497d-aab1-5acefc8a81ce",
+    "name": "ShapeShift Public Affiliate Auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ShapeShift Public API lets you integrate multi-chain swap functionality into your application. Fetch rates from multiple DEX aggregators and bridges, build executable quotes, and track swaps across supported blockchains.\n\n## Base URL\n\n```\nhttps://api.shapeshift.com\n```\n\nAll endpoints are versioned under `/v1` (e.g. `https://api.shapeshift.com/v1/swap/rates`). This interactive reference is served at `https://api.shapeshift.com/docs`, and the raw OpenAPI document at `https://api.shapeshift.com/docs/json`.\n\n## Two ways to integrate\n\n1. **Swap Widget SDK** — a drop-in React component with built-in UI, wallet connection, and multi-chain support. The fastest path. See the **Swap Widget SDK** section.\n2. **REST API** — call the endpoints directly and build your own UI for full control over UX. See the **REST API Guide** section, then the per-endpoint reference below.\n\n## Affiliate tracking (optional)\n\nSend an `X-Partner-Code` header with your registered partner code (e.g. `your-partner-code`) on the swap endpoints to attribute swaps for affiliate revenue share. The API attributes the swap to your affiliate account and applies your configured fee (bps) automatically. All endpoints work without it — unattributed swaps use the default fee. See the [Affiliate Program guide](https://github.com/shapeshift/web/blob/develop/docs/affiliates.md) for how to obtain a code.\n\n## Asset IDs (CAIP-19)\n\nAssets are identified with [CAIP-19](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-19.md): `{chainId}/{assetNamespace}:{assetReference}`\n\n- Native ETH: `eip155:1/slip44:60`\n- USDC on Ethereum: `eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`\n- Native BTC: `bip122:000000000019d6689c085ae165831e93/slip44:0`\n\nChains use [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) (e.g. `eip155:1`). Use `GET /v1/chains` and `GET /v1/assets` to discover supported values.\n\n## Errors\n\nErrors return the appropriate HTTP status and a JSON body:\n\n```json\n{ \"error\": \"Human-readable message\", \"code\": \"MACHINE_CODE\", \"details\": [] }\n```\n\n`code` and `details` are present where applicable (e.g. `QUOTE_NOT_FOUND`, `TX_HASH_REQUIRED`, `TX_HASH_MISMATCH`, `RATE_LIMIT_EXCEEDED`, validation `details`).\n\n## Rate limiting\n\nEndpoints are rate limited per IP on a fixed 60-second window. A global limit applies across all endpoints, and individual endpoint groups (data, rates, quote, status, affiliate) have their own independent limits on top of it — so a request counts against both. When either is exceeded, the API returns `429` with code `RATE_LIMIT_EXCEEDED` and these headers:\n\n- `Retry-After` — seconds until the window resets\n- `RateLimit-Limit` — max requests allowed per window\n- `RateLimit-Remaining` — requests remaining in the current window\n- `RateLimit-Reset` — seconds until the window resets\n\nBack off using `Retry-After` and avoid polling faster than necessary (see the REST API Guide for polling guidance).\n",
+      "type": "text/plain"
+    }
+  }
+}

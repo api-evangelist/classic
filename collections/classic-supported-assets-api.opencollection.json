@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ShapeShift Public Affiliate Supported Assets API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Supported Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List supported assets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shapeshift.com/v1/assets",
+            "params": [
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a list of all supported assets, optionally filtered by chain."
+        },
+        {
+          "info": {
+            "name": "Get asset by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shapeshift.com/v1/assets/:assetId",
+            "params": [
+              {
+                "name": "assetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get details of a specific asset by its ID (URL encoded)."
+        },
+        {
+          "info": {
+            "name": "Get asset count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shapeshift.com/v1/assets/count",
+            "params": [
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the total number of supported assets, optionally filtered by chain."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

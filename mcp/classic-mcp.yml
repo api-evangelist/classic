@@ -2,60 +2,65 @@ generated: '2026-07-18'
 method: derived
 status: candidate
 source: openapi/classic-shapeshift-openapi-original.json
-notes: >-
-  No official hosted/remote ShapeShift MCP server was found (the org publishes an
-  agentic-chat repo but no documented MCP endpoint). This is a candidate tool list
-  derived one-per-operation from the ShapeShift Public API OpenAPI.
+notes: No official hosted/remote ShapeShift MCP server was found (the org publishes an agentic-chat repo
+  but no documented MCP endpoint). This is a candidate tool list derived one-per-operation from the ShapeShift
+  Public API OpenAPI.
 server:
   name: classic-shapeshift
   transport: http
   url: null
 tools:
-  - name: create_affiliate
-    description: Register a new affiliate/partner.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#createAffiliate
-  - name: get_affiliate
-    description: Get an affiliate by address.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#getAffiliate
-  - name: update_affiliate
-    description: Update an affiliate configuration.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#updateAffiliate
-  - name: get_affiliate_stats
-    description: Get aggregate affiliate stats.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#getAffiliateStats
-  - name: get_affiliate_swaps
-    description: List swaps attributed to an affiliate (cursor paginated).
-    source_operation: openapi/classic-shapeshift-openapi-original.json#getAffiliateSwaps
-  - name: list_assets
-    description: List supported assets (offset paginated).
-    source_operation: openapi/classic-shapeshift-openapi-original.json#listAssets
-  - name: get_asset_by_id
-    description: Get a supported asset by CAIP-19 assetId.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#getAssetById
-  - name: get_asset_count
-    description: Count supported assets.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#getAssetCount
-  - name: siwe_nonce
-    description: Get a Sign-In With Ethereum nonce.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#siweNonce
-  - name: siwe_verify
-    description: Verify a signed SIWE message and return a JWT.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#siweVerify
-  - name: list_chains
-    description: List supported chains.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#listChains
-  - name: get_chain_count
-    description: Count supported chains.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#getChainCount
-  - name: resolve_partner
-    description: Resolve a partner by code.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#resolvePartner
-  - name: get_swap_quote
-    description: Get an executable swap quote.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#getSwapQuote
-  - name: get_swap_rates
-    description: Get indicative swap rates.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#getSwapRates
-  - name: get_swap_status
-    description: Get the status of a swap by quoteId or txHash.
-    source_operation: openapi/classic-shapeshift-openapi-original.json#getSwapStatus
+- name: create_affiliate
+  description: Register a new affiliate/partner.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#createAffiliate
+- name: get_affiliate
+  description: Get an affiliate by address.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#getAffiliate
+- name: update_affiliate
+  description: Update an affiliate configuration.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#updateAffiliate
+- name: get_affiliate_stats
+  description: Get aggregate affiliate stats.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#getAffiliateStats
+- name: get_affiliate_swaps
+  description: List swaps attributed to an affiliate (cursor paginated).
+  source_operation: openapi/classic-shapeshift-openapi-original.json#getAffiliateSwaps
+- name: list_assets
+  description: List supported assets (offset paginated).
+  source_operation: openapi/classic-shapeshift-openapi-original.json#listAssets
+- name: get_asset_by_id
+  description: Get a supported asset by CAIP-19 assetId.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#getAssetById
+- name: get_asset_count
+  description: Count supported assets.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#getAssetCount
+- name: siwe_nonce
+  description: Get a Sign-In With Ethereum nonce.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#siweNonce
+- name: siwe_verify
+  description: Verify a signed SIWE message and return a JWT.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#siweVerify
+- name: list_chains
+  description: List supported chains.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#listChains
+- name: get_chain_count
+  description: Count supported chains.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#getChainCount
+- name: resolve_partner
+  description: Resolve a partner by code.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#resolvePartner
+- name: get_swap_quote
+  description: Get an executable swap quote.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#getSwapQuote
+- name: get_swap_rates
+  description: Get indicative swap rates.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#getSwapRates
+- name: get_swap_status
+  description: Get the status of a swap by quoteId or txHash.
+  source_operation: openapi/classic-shapeshift-openapi-original.json#getSwapStatus
+deployment:
+  mode: none
+  verified: derived
+  tools: 16
+  checked: '2026-08-12'
+  source: catalog MCP census

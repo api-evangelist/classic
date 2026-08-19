@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ShapeShift Public Affiliate Supported Chains API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Supported Chains",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List supported chains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shapeshift.com/v1/chains"
+          },
+          "docs": "Get a list of all supported blockchain networks, sorted alphabetically by name."
+        },
+        {
+          "info": {
+            "name": "Get chain count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shapeshift.com/v1/chains/count"
+          },
+          "docs": "Get the total number of supported blockchain networks."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

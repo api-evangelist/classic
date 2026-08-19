@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ShapeShift Public Affiliate Auth API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get SIWE nonce",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shapeshift.com/v1/auth/siwe/nonce"
+          },
+          "docs": "Request a nonce for Sign-In with Ethereum (SIWE) authentication."
+        },
+        {
+          "info": {
+            "name": "Verify SIWE signature",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shapeshift.com/v1/auth/siwe/verify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify a Sign-In with Ethereum (SIWE) message and signature. Returns a JWT token on success."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

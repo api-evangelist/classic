@@ -1,0 +1,360 @@
+{
+  "item": [
+    {
+      "id": "285f2bf2-1481-48d0-b834-354cd2cccaef",
+      "name": "Supported Chains",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c9e5e44-451e-4b4a-ad5c-fa13ff834da0",
+          "name": "List supported chains",
+          "request": {
+            "name": "List supported chains",
+            "description": {
+              "content": "Get a list of all supported blockchain networks, sorted alphabetically by name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "chains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2eb3d0db-31a3-4364-9387-98a81eaccb70",
+              "name": "List of chains",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "chains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chains\": [\n    {\n      \"chainId\": \"eip155:1\",\n      \"name\": \"Ethereum\",\n      \"type\": \"evm\",\n      \"symbol\": \"ETH\",\n      \"precision\": 18,\n      \"color\": \"#5C6BC0\",\n      \"explorer\": \"https://etherscan.io\",\n      \"explorerAddressLink\": \"https://etherscan.io/address/\",\n      \"explorerTxLink\": \"https://etherscan.io/tx/\",\n      \"nativeAssetId\": \"eip155:1/slip44:60\",\n      \"networkColor\": \"#5C6BC0\",\n      \"icon\": \"https://rawcdn.githack.com/trustwallet/assets/32e51d582a890b3dd3135fe3ee7c20c2fd699a6d/blockchains/ethereum/info/logo.png\",\n      \"networkIcon\": \"https://rawcdn.githack.com/trustwallet/assets/32e51d582a890b3dd3135fe3ee7c20c2fd699a6d/blockchains/ethereum/info/logo.png\"\n    },\n    {\n      \"chainId\": \"eip155:1\",\n      \"name\": \"Ethereum\",\n      \"type\": \"evm\",\n      \"symbol\": \"ETH\",\n      \"precision\": 18,\n      \"color\": \"#5C6BC0\",\n      \"explorer\": \"https://etherscan.io\",\n      \"explorerAddressLink\": \"https://etherscan.io/address/\",\n      \"explorerTxLink\": \"https://etherscan.io/tx/\",\n      \"nativeAssetId\": \"eip155:1/slip44:60\",\n      \"networkColor\": \"#5C6BC0\",\n      \"icon\": \"https://rawcdn.githack.com/trustwallet/assets/32e51d582a890b3dd3135fe3ee7c20c2fd699a6d/blockchains/ethereum/info/logo.png\",\n      \"networkIcon\": \"https://rawcdn.githack.com/trustwallet/assets/32e51d582a890b3dd3135fe3ee7c20c2fd699a6d/blockchains/ethereum/info/logo.png\"\n    }\n  ],\n  \"timestamp\": 7970.6994982209835\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1abe1815-3460-4cc0-9b67-6e3f7d6c7af7",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "chains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec826afb-799e-43a1-a61f-ea8dc4e184f8",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "chains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e378baf5-7f50-4f01-a990-4dd43599036e",
+          "name": "Get chain count",
+          "request": {
+            "name": "Get chain count",
+            "description": {
+              "content": "Get the total number of supported blockchain networks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "chains",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c061b5ad-d73c-40c0-ac96-27bd8c8ee992",
+              "name": "Chain count",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "chains",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 28,\n  \"timestamp\": 1473.7819713107504\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "becabbb6-409b-47ea-b46c-7b559c703f10",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "chains",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92c41661-07ae-4f44-bd7b-7d175909f00d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "chains",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.shapeshift.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e71234c8-12a5-452c-8183-78fe2e3eb412",
+    "name": "ShapeShift Public Affiliate Supported Chains API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ShapeShift Public API lets you integrate multi-chain swap functionality into your application. Fetch rates from multiple DEX aggregators and bridges, build executable quotes, and track swaps across supported blockchains.\n\n## Base URL\n\n```\nhttps://api.shapeshift.com\n```\n\nAll endpoints are versioned under `/v1` (e.g. `https://api.shapeshift.com/v1/swap/rates`). This interactive reference is served at `https://api.shapeshift.com/docs`, and the raw OpenAPI document at `https://api.shapeshift.com/docs/json`.\n\n## Two ways to integrate\n\n1. **Swap Widget SDK** — a drop-in React component with built-in UI, wallet connection, and multi-chain support. The fastest path. See the **Swap Widget SDK** section.\n2. **REST API** — call the endpoints directly and build your own UI for full control over UX. See the **REST API Guide** section, then the per-endpoint reference below.\n\n## Affiliate tracking (optional)\n\nSend an `X-Partner-Code` header with your registered partner code (e.g. `your-partner-code`) on the swap endpoints to attribute swaps for affiliate revenue share. The API attributes the swap to your affiliate account and applies your configured fee (bps) automatically. All endpoints work without it — unattributed swaps use the default fee. See the [Affiliate Program guide](https://github.com/shapeshift/web/blob/develop/docs/affiliates.md) for how to obtain a code.\n\n## Asset IDs (CAIP-19)\n\nAssets are identified with [CAIP-19](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-19.md): `{chainId}/{assetNamespace}:{assetReference}`\n\n- Native ETH: `eip155:1/slip44:60`\n- USDC on Ethereum: `eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`\n- Native BTC: `bip122:000000000019d6689c085ae165831e93/slip44:0`\n\nChains use [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) (e.g. `eip155:1`). Use `GET /v1/chains` and `GET /v1/assets` to discover supported values.\n\n## Errors\n\nErrors return the appropriate HTTP status and a JSON body:\n\n```json\n{ \"error\": \"Human-readable message\", \"code\": \"MACHINE_CODE\", \"details\": [] }\n```\n\n`code` and `details` are present where applicable (e.g. `QUOTE_NOT_FOUND`, `TX_HASH_REQUIRED`, `TX_HASH_MISMATCH`, `RATE_LIMIT_EXCEEDED`, validation `details`).\n\n## Rate limiting\n\nEndpoints are rate limited per IP on a fixed 60-second window. A global limit applies across all endpoints, and individual endpoint groups (data, rates, quote, status, affiliate) have their own independent limits on top of it — so a request counts against both. When either is exceeded, the API returns `429` with code `RATE_LIMIT_EXCEEDED` and these headers:\n\n- `Retry-After` — seconds until the window resets\n- `RateLimit-Limit` — max requests allowed per window\n- `RateLimit-Remaining` — requests remaining in the current window\n- `RateLimit-Reset` — seconds until the window resets\n\nBack off using `Retry-After` and avoid polling faster than necessary (see the REST API Guide for polling guidance).\n",
+      "type": "text/plain"
+    }
+  }
+}

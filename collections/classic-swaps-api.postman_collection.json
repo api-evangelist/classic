@@ -1,0 +1,1149 @@
+{
+  "item": [
+    {
+      "id": "d52526bf-03af-494b-bc41-bd507e071eaa",
+      "name": "Swaps",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "513a2c88-a9fb-4193-ba2b-734b8fd1d61b",
+          "name": "Get executable quote",
+          "request": {
+            "name": "Get executable quote",
+            "description": {
+              "content": "Get an executable quote for a swap, including transaction data. Requires a specific swapper name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "swap",
+                "quote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                "key": "X-Partner-Code",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sellAssetId\": \"<string>\",\n  \"buyAssetId\": \"<string>\",\n  \"sellAmountCryptoBaseUnit\": \"<string>\",\n  \"receiveAddress\": \"<string>\",\n  \"sendAddress\": \"<string>\",\n  \"swapperName\": \"<string>\",\n  \"slippageTolerancePercentageDecimal\": \"<string>\",\n  \"accountNumber\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eafa1cfa-4a97-420a-8e6c-fe2c0163a81d",
+              "name": "Swap quote",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellAssetId\": \"eip155:1/slip44:60\",\n  \"buyAssetId\": \"bip122:000000000019d6689c085ae165831e93/slip44:0\",\n  \"sellAmountCryptoBaseUnit\": \"1000000000000000000\",\n  \"receiveAddress\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq\",\n  \"sendAddress\": \"0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045\",\n  \"swapperName\": \"Relay\",\n  \"slippageTolerancePercentageDecimal\": \"0.01\",\n  \"accountNumber\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quoteId\": \"d5705b21-dd2a-ed17-7250-34a2d26329f3\",\n  \"swapperName\": \"0x\",\n  \"rate\": \"0.995\",\n  \"sellAsset\": {\n    \"assetId\": \"eip155:1/slip44:60\",\n    \"chainId\": \"eip155:1\",\n    \"name\": \"Ethereum\",\n    \"symbol\": \"ETH\",\n    \"precision\": 18,\n    \"color\": \"#5C6BC0\",\n    \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n    \"explorer\": \"https://etherscan.io\",\n    \"explorerAddressLink\": \"https://etherscan.io/address/\",\n    \"explorerTxLink\": \"https://etherscan.io/tx/\",\n    \"relatedAssetKey\": \"string\",\n    \"networkName\": \"Ethereum\",\n    \"networkColor\": \"#5C6BC0\",\n    \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n  },\n  \"buyAsset\": {\n    \"assetId\": \"eip155:1/slip44:60\",\n    \"chainId\": \"eip155:1\",\n    \"name\": \"Ethereum\",\n    \"symbol\": \"ETH\",\n    \"precision\": 18,\n    \"color\": \"#5C6BC0\",\n    \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n    \"explorer\": \"https://etherscan.io\",\n    \"explorerAddressLink\": \"https://etherscan.io/address/\",\n    \"explorerTxLink\": \"https://etherscan.io/tx/\",\n    \"relatedAssetKey\": \"string\",\n    \"networkName\": \"Ethereum\",\n    \"networkColor\": \"#5C6BC0\",\n    \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n  },\n  \"sellAmountCryptoBaseUnit\": \"string\",\n  \"buyAmountBeforeFeesCryptoBaseUnit\": \"string\",\n  \"buyAmountAfterFeesCryptoBaseUnit\": \"string\",\n  \"affiliateBps\": \"60\",\n  \"shapeshiftBps\": \"10\",\n  \"approval\": {\n    \"isRequired\": true,\n    \"spender\": \"0xdef1c0ded9bec7f1a1670819833240f027b25eff\",\n    \"approvalTx\": {\n      \"to\": \"0xdef1c0ded9bec7f1a1670819833240f027b25eff\",\n      \"data\": \"0x\",\n      \"value\": \"0\"\n    }\n  },\n  \"steps\": [\n    {\n      \"sellAsset\": {\n        \"assetId\": \"eip155:1/slip44:60\",\n        \"chainId\": \"eip155:1\",\n        \"name\": \"Ethereum\",\n        \"symbol\": \"ETH\",\n        \"precision\": 18,\n        \"color\": \"#5C6BC0\",\n        \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n        \"explorer\": \"https://etherscan.io\",\n        \"explorerAddressLink\": \"https://etherscan.io/address/\",\n        \"explorerTxLink\": \"https://etherscan.io/tx/\",\n        \"relatedAssetKey\": \"string\",\n        \"networkName\": \"Ethereum\",\n        \"networkColor\": \"#5C6BC0\",\n        \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n      },\n      \"buyAsset\": {\n        \"assetId\": \"eip155:1/slip44:60\",\n        \"chainId\": \"eip155:1\",\n        \"name\": \"Ethereum\",\n        \"symbol\": \"ETH\",\n        \"precision\": 18,\n        \"color\": \"#5C6BC0\",\n        \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n        \"explorer\": \"https://etherscan.io\",\n        \"explorerAddressLink\": \"https://etherscan.io/address/\",\n        \"explorerTxLink\": \"https://etherscan.io/tx/\",\n        \"relatedAssetKey\": \"string\",\n        \"networkName\": \"Ethereum\",\n        \"networkColor\": \"#5C6BC0\",\n        \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n      },\n      \"sellAmountCryptoBaseUnit\": \"1000000000000000000\",\n      \"buyAmountAfterFeesCryptoBaseUnit\": \"995000000\",\n      \"allowanceContract\": \"0xdef1c0ded9bec7f1a1670819833240f027b25eff\",\n      \"source\": \"0x\",\n      \"estimatedExecutionTimeMs\": 60000,\n      \"transactionData\": {\n        \"type\": \"evm\",\n        \"chainId\": 1,\n        \"to\": \"0xdef1c0ded9bec7f1a1670819833240f027b25eff\",\n        \"data\": \"0x...\",\n        \"value\": \"1000000000000000000\",\n        \"gasLimit\": \"300000\",\n        \"signatureRequired\": {\n          \"type\": \"permit2\",\n          \"eip712\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        }\n      }\n    },\n    {\n      \"sellAsset\": {\n        \"assetId\": \"eip155:1/slip44:60\",\n        \"chainId\": \"eip155:1\",\n        \"name\": \"Ethereum\",\n        \"symbol\": \"ETH\",\n        \"precision\": 18,\n        \"color\": \"#5C6BC0\",\n        \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n        \"explorer\": \"https://etherscan.io\",\n        \"explorerAddressLink\": \"https://etherscan.io/address/\",\n        \"explorerTxLink\": \"https://etherscan.io/tx/\",\n        \"relatedAssetKey\": \"string\",\n        \"networkName\": \"Ethereum\",\n        \"networkColor\": \"#5C6BC0\",\n        \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n      },\n      \"buyAsset\": {\n        \"assetId\": \"eip155:1/slip44:60\",\n        \"chainId\": \"eip155:1\",\n        \"name\": \"Ethereum\",\n        \"symbol\": \"ETH\",\n        \"precision\": 18,\n        \"color\": \"#5C6BC0\",\n        \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n        \"explorer\": \"https://etherscan.io\",\n        \"explorerAddressLink\": \"https://etherscan.io/address/\",\n        \"explorerTxLink\": \"https://etherscan.io/tx/\",\n        \"relatedAssetKey\": \"string\",\n        \"networkName\": \"Ethereum\",\n        \"networkColor\": \"#5C6BC0\",\n        \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n      },\n      \"sellAmountCryptoBaseUnit\": \"1000000000000000000\",\n      \"buyAmountAfterFeesCryptoBaseUnit\": \"995000000\",\n      \"allowanceContract\": \"0xdef1c0ded9bec7f1a1670819833240f027b25eff\",\n      \"source\": \"0x\",\n      \"estimatedExecutionTimeMs\": 60000,\n      \"transactionData\": {\n        \"type\": \"evm\",\n        \"chainId\": 1,\n        \"to\": \"0xdef1c0ded9bec7f1a1670819833240f027b25eff\",\n        \"data\": \"0x...\",\n        \"value\": \"1000000000000000000\",\n        \"gasLimit\": \"300000\",\n        \"signatureRequired\": {\n          \"type\": \"permit2\",\n          \"eip712\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        }\n      }\n    }\n  ],\n  \"expiresAt\": 1477.3075000970848,\n  \"partnerBps\": \"50\",\n  \"slippageTolerancePercentageDecimal\": \"0.01\",\n  \"networkFeeCryptoBaseUnit\": \"23000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ee998d1-b441-42b2-b6d3-3eea26acc2e7",
+              "name": "Invalid request or unavailable swapper",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellAssetId\": \"eip155:1/slip44:60\",\n  \"buyAssetId\": \"bip122:000000000019d6689c085ae165831e93/slip44:0\",\n  \"sellAmountCryptoBaseUnit\": \"1000000000000000000\",\n  \"receiveAddress\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq\",\n  \"sendAddress\": \"0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045\",\n  \"swapperName\": \"Relay\",\n  \"slippageTolerancePercentageDecimal\": \"0.01\",\n  \"accountNumber\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2b817174-b314-40cc-996b-11bd4ccd956b",
+              "name": "No quote available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellAssetId\": \"eip155:1/slip44:60\",\n  \"buyAssetId\": \"bip122:000000000019d6689c085ae165831e93/slip44:0\",\n  \"sellAmountCryptoBaseUnit\": \"1000000000000000000\",\n  \"receiveAddress\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq\",\n  \"sendAddress\": \"0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045\",\n  \"swapperName\": \"Relay\",\n  \"slippageTolerancePercentageDecimal\": \"0.01\",\n  \"accountNumber\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cb077b16-9a02-4439-985e-06943d081adc",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellAssetId\": \"eip155:1/slip44:60\",\n  \"buyAssetId\": \"bip122:000000000019d6689c085ae165831e93/slip44:0\",\n  \"sellAmountCryptoBaseUnit\": \"1000000000000000000\",\n  \"receiveAddress\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq\",\n  \"sendAddress\": \"0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045\",\n  \"swapperName\": \"Relay\",\n  \"slippageTolerancePercentageDecimal\": \"0.01\",\n  \"accountNumber\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a25cc08-ee67-4ebd-8b60-8acd8ae9eeeb",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellAssetId\": \"eip155:1/slip44:60\",\n  \"buyAssetId\": \"bip122:000000000019d6689c085ae165831e93/slip44:0\",\n  \"sellAmountCryptoBaseUnit\": \"1000000000000000000\",\n  \"receiveAddress\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq\",\n  \"sendAddress\": \"0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045\",\n  \"swapperName\": \"Relay\",\n  \"slippageTolerancePercentageDecimal\": \"0.01\",\n  \"accountNumber\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "800c6418-ed3a-41f5-8561-093205168d3f",
+          "name": "Get swap rates",
+          "request": {
+            "name": "Get swap rates",
+            "description": {
+              "content": "Get informative swap rates from all available swappers. This does not create a transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "swap",
+                "rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sellAssetId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "buyAssetId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "sellAmountCryptoBaseUnit",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "slippageTolerancePercentageDecimal",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                "key": "X-Partner-Code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3039e0a-b188-4773-97d5-8089be54d340",
+              "name": "Swap rates",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sellAssetId",
+                      "value": "eip155:1/slip44:60"
+                    },
+                    {
+                      "key": "buyAssetId",
+                      "value": "eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+                    },
+                    {
+                      "key": "sellAmountCryptoBaseUnit",
+                      "value": "1000000000000000000"
+                    },
+                    {
+                      "key": "slippageTolerancePercentageDecimal",
+                      "value": "0.01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rates\": [\n    {\n      \"swapperName\": \"string\",\n      \"rate\": \"string\",\n      \"buyAmountCryptoBaseUnit\": \"string\",\n      \"sellAmountCryptoBaseUnit\": \"string\",\n      \"steps\": 3148.2042548242252,\n      \"affiliateBps\": \"60\",\n      \"shapeshiftBps\": \"10\",\n      \"estimatedExecutionTimeMs\": 7146.891268809654,\n      \"priceImpactPercentageDecimal\": \"string\",\n      \"partnerBps\": \"50\",\n      \"networkFeeCryptoBaseUnit\": \"string\",\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    },\n    {\n      \"swapperName\": \"string\",\n      \"rate\": \"string\",\n      \"buyAmountCryptoBaseUnit\": \"string\",\n      \"sellAmountCryptoBaseUnit\": \"string\",\n      \"steps\": 5672.088466447137,\n      \"affiliateBps\": \"60\",\n      \"shapeshiftBps\": \"10\",\n      \"estimatedExecutionTimeMs\": 5476.802037254545,\n      \"priceImpactPercentageDecimal\": \"string\",\n      \"partnerBps\": \"50\",\n      \"networkFeeCryptoBaseUnit\": \"string\",\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    }\n  ],\n  \"timestamp\": 319.8340509823494,\n  \"expiresAt\": 4663.019168139247\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23c00e9b-5ee7-47c3-8cea-5e62778069f3",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sellAssetId",
+                      "value": "eip155:1/slip44:60"
+                    },
+                    {
+                      "key": "buyAssetId",
+                      "value": "eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+                    },
+                    {
+                      "key": "sellAmountCryptoBaseUnit",
+                      "value": "1000000000000000000"
+                    },
+                    {
+                      "key": "slippageTolerancePercentageDecimal",
+                      "value": "0.01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "80d25de0-46b8-4369-91f3-5ad80af1763b",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sellAssetId",
+                      "value": "eip155:1/slip44:60"
+                    },
+                    {
+                      "key": "buyAssetId",
+                      "value": "eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+                    },
+                    {
+                      "key": "sellAmountCryptoBaseUnit",
+                      "value": "1000000000000000000"
+                    },
+                    {
+                      "key": "slippageTolerancePercentageDecimal",
+                      "value": "0.01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e6034d0-b7dc-445f-b629-d25e56f1b6b9",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sellAssetId",
+                      "value": "eip155:1/slip44:60"
+                    },
+                    {
+                      "key": "buyAssetId",
+                      "value": "eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+                    },
+                    {
+                      "key": "sellAmountCryptoBaseUnit",
+                      "value": "1000000000000000000"
+                    },
+                    {
+                      "key": "slippageTolerancePercentageDecimal",
+                      "value": "0.01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c804a512-2ed3-497b-9f4e-0ba9da521174",
+          "name": "Get swap status",
+          "request": {
+            "name": "Get swap status",
+            "description": {
+              "content": "Look up the current status of a swap by its quote ID. Pass txHash on the first call after broadcasting to bind it to the quote and start tracking. Subsequent calls can omit txHash.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "swap",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "quoteId",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "txHash",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                "key": "X-Partner-Code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16a07fe9-985d-4487-b42f-a445cd1124e5",
+              "name": "Swap status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quoteId\": \"d0e900f8-0113-cf68-e492-92bac381b849\",\n  \"status\": \"failed\",\n  \"swapperName\": \"string\",\n  \"sellAssetId\": \"string\",\n  \"buyAssetId\": \"string\",\n  \"sellAmountCryptoBaseUnit\": \"string\",\n  \"buyAmountAfterFeesCryptoBaseUnit\": \"string\",\n  \"affiliateBps\": \"60\",\n  \"shapeshiftBps\": \"10\",\n  \"txHash\": \"string\",\n  \"partnerAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerBps\": \"50\",\n  \"registeredAt\": 3592.1929178518276,\n  \"buyTxHash\": \"string\",\n  \"isAffiliateVerified\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c11379d-5a3b-428e-a507-a2b1c3447635",
+              "name": "Invalid request parameters or txHash required to begin tracking",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f6a25fb9-e193-4ff9-b51e-c9e17ed3d3bd",
+              "name": "Quote not found or expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "57e9181e-685d-4f39-8772-7891ac38eebf",
+              "name": "Transaction hash mismatch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "284a15ce-7e69-409e-bfbf-bae27e97c3c6",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65243cde-30b5-4953-8159-245799962c38",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9fd7b08f-1810-4c0c-9a8f-428b2ee44d93",
+              "name": "Swap service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a0305d9d-d2f5-4e88-bfa7-3e46ad97f181",
+              "name": "Swap service timed out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "swap",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Partner code for affiliate fee attribution. The API resolves the code to the registered affiliate address and BPS. Register a code at the affiliate dashboard.",
+                    "key": "X-Partner-Code",
+                    "value": "vultisig"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.shapeshift.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e38ad89f-d470-4c01-870c-39f825c50d68",
+    "name": "ShapeShift Public Affiliate Swaps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ShapeShift Public API lets you integrate multi-chain swap functionality into your application. Fetch rates from multiple DEX aggregators and bridges, build executable quotes, and track swaps across supported blockchains.\n\n## Base URL\n\n```\nhttps://api.shapeshift.com\n```\n\nAll endpoints are versioned under `/v1` (e.g. `https://api.shapeshift.com/v1/swap/rates`). This interactive reference is served at `https://api.shapeshift.com/docs`, and the raw OpenAPI document at `https://api.shapeshift.com/docs/json`.\n\n## Two ways to integrate\n\n1. **Swap Widget SDK** — a drop-in React component with built-in UI, wallet connection, and multi-chain support. The fastest path. See the **Swap Widget SDK** section.\n2. **REST API** — call the endpoints directly and build your own UI for full control over UX. See the **REST API Guide** section, then the per-endpoint reference below.\n\n## Affiliate tracking (optional)\n\nSend an `X-Partner-Code` header with your registered partner code (e.g. `your-partner-code`) on the swap endpoints to attribute swaps for affiliate revenue share. The API attributes the swap to your affiliate account and applies your configured fee (bps) automatically. All endpoints work without it — unattributed swaps use the default fee. See the [Affiliate Program guide](https://github.com/shapeshift/web/blob/develop/docs/affiliates.md) for how to obtain a code.\n\n## Asset IDs (CAIP-19)\n\nAssets are identified with [CAIP-19](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-19.md): `{chainId}/{assetNamespace}:{assetReference}`\n\n- Native ETH: `eip155:1/slip44:60`\n- USDC on Ethereum: `eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`\n- Native BTC: `bip122:000000000019d6689c085ae165831e93/slip44:0`\n\nChains use [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) (e.g. `eip155:1`). Use `GET /v1/chains` and `GET /v1/assets` to discover supported values.\n\n## Errors\n\nErrors return the appropriate HTTP status and a JSON body:\n\n```json\n{ \"error\": \"Human-readable message\", \"code\": \"MACHINE_CODE\", \"details\": [] }\n```\n\n`code` and `details` are present where applicable (e.g. `QUOTE_NOT_FOUND`, `TX_HASH_REQUIRED`, `TX_HASH_MISMATCH`, `RATE_LIMIT_EXCEEDED`, validation `details`).\n\n## Rate limiting\n\nEndpoints are rate limited per IP on a fixed 60-second window. A global limit applies across all endpoints, and individual endpoint groups (data, rates, quote, status, affiliate) have their own independent limits on top of it — so a request counts against both. When either is exceeded, the API returns `429` with code `RATE_LIMIT_EXCEEDED` and these headers:\n\n- `Retry-After` — seconds until the window resets\n- `RateLimit-Limit` — max requests allowed per window\n- `RateLimit-Remaining` — requests remaining in the current window\n- `RateLimit-Reset` — seconds until the window resets\n\nBack off using `Retry-After` and avoid polling faster than necessary (see the REST API Guide for polling guidance).\n",
+      "type": "text/plain"
+    }
+  }
+}

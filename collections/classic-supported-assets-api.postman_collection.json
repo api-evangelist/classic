@@ -1,0 +1,791 @@
+{
+  "item": [
+    {
+      "id": "60a9a39d-5052-421f-a2e2-216ea54b94f5",
+      "name": "Supported Assets",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1b9866ef-71f3-4276-9238-b611e6bc741b",
+          "name": "List supported assets",
+          "request": {
+            "name": "List supported assets",
+            "description": {
+              "content": "Get a list of all supported assets, optionally filtered by chain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "assets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "chainId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "921cac71-ba18-4325-b6bc-aa984eaa3a6e",
+              "name": "List of assets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chainId",
+                      "value": "eip155:1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"assetId\": \"eip155:1/slip44:60\",\n      \"chainId\": \"eip155:1\",\n      \"name\": \"Ethereum\",\n      \"symbol\": \"ETH\",\n      \"precision\": 18,\n      \"color\": \"#5C6BC0\",\n      \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n      \"explorer\": \"https://etherscan.io\",\n      \"explorerAddressLink\": \"https://etherscan.io/address/\",\n      \"explorerTxLink\": \"https://etherscan.io/tx/\",\n      \"relatedAssetKey\": \"string\",\n      \"networkName\": \"Ethereum\",\n      \"networkColor\": \"#5C6BC0\",\n      \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n    },\n    {\n      \"assetId\": \"eip155:1/slip44:60\",\n      \"chainId\": \"eip155:1\",\n      \"name\": \"Ethereum\",\n      \"symbol\": \"ETH\",\n      \"precision\": 18,\n      \"color\": \"#5C6BC0\",\n      \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n      \"explorer\": \"https://etherscan.io\",\n      \"explorerAddressLink\": \"https://etherscan.io/address/\",\n      \"explorerTxLink\": \"https://etherscan.io/tx/\",\n      \"relatedAssetKey\": \"string\",\n      \"networkName\": \"Ethereum\",\n      \"networkColor\": \"#5C6BC0\",\n      \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n    }\n  ],\n  \"timestamp\": 3186.1255474113336\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fb9076c-daf4-4b82-83c5-10a51c9c58b7",
+              "name": "Invalid query parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chainId",
+                      "value": "eip155:1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6bf09ea1-a82c-46e5-8251-21c1e077dcad",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chainId",
+                      "value": "eip155:1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68fab560-b5db-4102-94b5-a8a8d6a2147a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chainId",
+                      "value": "eip155:1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cff18945-5172-4d48-a5e5-d8778d55affe",
+          "name": "Get asset by ID",
+          "request": {
+            "name": "Get asset by ID",
+            "description": {
+              "content": "Get details of a specific asset by its ID (URL encoded).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "assets",
+                ":assetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "assetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5b5af57-4aff-49a7-8f25-05fdd7535698",
+              "name": "Asset details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assetId\": \"eip155:1/slip44:60\",\n  \"chainId\": \"eip155:1\",\n  \"name\": \"Ethereum\",\n  \"symbol\": \"ETH\",\n  \"precision\": 18,\n  \"color\": \"#5C6BC0\",\n  \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n  \"explorer\": \"https://etherscan.io\",\n  \"explorerAddressLink\": \"https://etherscan.io/address/\",\n  \"explorerTxLink\": \"https://etherscan.io/tx/\",\n  \"relatedAssetKey\": \"string\",\n  \"networkName\": \"Ethereum\",\n  \"networkColor\": \"#5C6BC0\",\n  \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75bd3b2a-8375-4485-96a2-1c803a951416",
+              "name": "Invalid asset ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8df5d480-0cf5-4920-9c4f-4f69c0f48761",
+              "name": "Asset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "45ce5ee3-b893-46a6-9657-6f51bf02d322",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0341e364-ee49-4520-9988-3089da28de32",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34f20c44-4c06-4f80-be3d-3df5c120019a",
+          "name": "Get asset count",
+          "request": {
+            "name": "Get asset count",
+            "description": {
+              "content": "Get the total number of supported assets, optionally filtered by chain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "assets",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "chainId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff5d8af2-cde5-47c3-8381-fa6ad80f345d",
+              "name": "Asset count",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chainId",
+                      "value": "eip155:1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 5000,\n  \"timestamp\": 7232.146652215932\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42e7ef53-a498-494c-96c1-03af83e0b5da",
+              "name": "Invalid query parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chainId",
+                      "value": "eip155:1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a55b4051-ef47-490d-825d-4fb6dd6b956f",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chainId",
+                      "value": "eip155:1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d32f110-8d68-448d-b660-23582af1d3b8",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chainId",
+                      "value": "eip155:1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.shapeshift.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f069d6a3-d8c6-44c2-9b30-7a87cfc8e850",
+    "name": "ShapeShift Public Affiliate Supported Assets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ShapeShift Public API lets you integrate multi-chain swap functionality into your application. Fetch rates from multiple DEX aggregators and bridges, build executable quotes, and track swaps across supported blockchains.\n\n## Base URL\n\n```\nhttps://api.shapeshift.com\n```\n\nAll endpoints are versioned under `/v1` (e.g. `https://api.shapeshift.com/v1/swap/rates`). This interactive reference is served at `https://api.shapeshift.com/docs`, and the raw OpenAPI document at `https://api.shapeshift.com/docs/json`.\n\n## Two ways to integrate\n\n1. **Swap Widget SDK** — a drop-in React component with built-in UI, wallet connection, and multi-chain support. The fastest path. See the **Swap Widget SDK** section.\n2. **REST API** — call the endpoints directly and build your own UI for full control over UX. See the **REST API Guide** section, then the per-endpoint reference below.\n\n## Affiliate tracking (optional)\n\nSend an `X-Partner-Code` header with your registered partner code (e.g. `your-partner-code`) on the swap endpoints to attribute swaps for affiliate revenue share. The API attributes the swap to your affiliate account and applies your configured fee (bps) automatically. All endpoints work without it — unattributed swaps use the default fee. See the [Affiliate Program guide](https://github.com/shapeshift/web/blob/develop/docs/affiliates.md) for how to obtain a code.\n\n## Asset IDs (CAIP-19)\n\nAssets are identified with [CAIP-19](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-19.md): `{chainId}/{assetNamespace}:{assetReference}`\n\n- Native ETH: `eip155:1/slip44:60`\n- USDC on Ethereum: `eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`\n- Native BTC: `bip122:000000000019d6689c085ae165831e93/slip44:0`\n\nChains use [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) (e.g. `eip155:1`). Use `GET /v1/chains` and `GET /v1/assets` to discover supported values.\n\n## Errors\n\nErrors return the appropriate HTTP status and a JSON body:\n\n```json\n{ \"error\": \"Human-readable message\", \"code\": \"MACHINE_CODE\", \"details\": [] }\n```\n\n`code` and `details` are present where applicable (e.g. `QUOTE_NOT_FOUND`, `TX_HASH_REQUIRED`, `TX_HASH_MISMATCH`, `RATE_LIMIT_EXCEEDED`, validation `details`).\n\n## Rate limiting\n\nEndpoints are rate limited per IP on a fixed 60-second window. A global limit applies across all endpoints, and individual endpoint groups (data, rates, quote, status, affiliate) have their own independent limits on top of it — so a request counts against both. When either is exceeded, the API returns `429` with code `RATE_LIMIT_EXCEEDED` and these headers:\n\n- `Retry-After` — seconds until the window resets\n- `RateLimit-Limit` — max requests allowed per window\n- `RateLimit-Remaining` — requests remaining in the current window\n- `RateLimit-Reset` — seconds until the window resets\n\nBack off using `Retry-After` and avoid polling faster than necessary (see the REST API Guide for polling guidance).\n",
+      "type": "text/plain"
+    }
+  }
+}

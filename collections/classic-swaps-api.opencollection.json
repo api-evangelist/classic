@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ShapeShift Public Affiliate Swaps API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Swaps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get executable quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shapeshift.com/v1/swap/quote",
+            "headers": [
+              {
+                "name": "X-Partner-Code",
+                "value": "vultisig"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get an executable quote for a swap, including transaction data. Requires a specific swapper name."
+        },
+        {
+          "info": {
+            "name": "Get swap rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shapeshift.com/v1/swap/rates",
+            "headers": [
+              {
+                "name": "X-Partner-Code",
+                "value": "vultisig"
+              }
+            ],
+            "params": [
+              {
+                "name": "sellAssetId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "buyAssetId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sellAmountCryptoBaseUnit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "slippageTolerancePercentageDecimal",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get informative swap rates from all available swappers. This does not create a transaction."
+        },
+        {
+          "info": {
+            "name": "Get swap status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shapeshift.com/v1/swap/status",
+            "headers": [
+              {
+                "name": "X-Partner-Code",
+                "value": "vultisig"
+              }
+            ],
+            "params": [
+              {
+                "name": "quoteId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "txHash",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Look up the current status of a swap by its quote ID. Pass txHash on the first call after broadcasting to bind it to the quote and start tracking. Subsequent calls can omit txHash."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

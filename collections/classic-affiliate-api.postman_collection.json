@@ -1,0 +1,2450 @@
+{
+  "item": [
+    {
+      "id": "9191ee7a-61d5-459d-b2ba-a239aab019c2",
+      "name": "Affiliate",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b3347cc3-c013-4552-aa8a-474f423038f8",
+          "name": "Create affiliate",
+          "request": {
+            "name": "Create affiliate",
+            "description": {
+              "content": "Register a new affiliate. Requires a valid SIWE JWT in the Authorization header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "affiliate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"walletAddress\": \"<string>\",\n  \"partnerCode\": \"<string>\",\n  \"bps\": \"<integer>\",\n  \"receiveAddress\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5a95ae8f-c552-4744-b390-12755d83ab61",
+              "name": "Affiliate created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"<string>\",\n  \"bps\": \"<integer>\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"mypartner\",\n  \"partnerBps\": 50,\n  \"shapeshiftBps\": 10,\n  \"isActive\": true,\n  \"createdAt\": \"2024-01-01T00:00:00.000Z\",\n  \"updatedAt\": \"2024-01-01T00:00:00.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "146d76ea-cff6-43cb-a656-ab479a781160",
+              "name": "Invalid request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"<string>\",\n  \"bps\": \"<integer>\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5c63d827-6077-420f-9449-e0723a9d89b3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"<string>\",\n  \"bps\": \"<integer>\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "648be09b-4b66-4211-aab1-1da752b2c3bd",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"<string>\",\n  \"bps\": \"<integer>\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cb6263d8-f035-443b-956e-7f8faa4f5131",
+              "name": "Affiliate already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"<string>\",\n  \"bps\": \"<integer>\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ad0ee67-0b79-42e5-9e7c-94986c6f5c9f",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"<string>\",\n  \"bps\": \"<integer>\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b991f2f-3479-4884-bc11-fb527854f97d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"<string>\",\n  \"bps\": \"<integer>\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b7266f01-53ff-47f4-9848-fadabe9dbcd5",
+              "name": "Swap service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"<string>\",\n  \"bps\": \"<integer>\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "49eacc23-b90b-4179-ad28-154938c9526a",
+              "name": "Swap service timed out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"<string>\",\n  \"bps\": \"<integer>\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c6cb232-f25d-43ba-b2bb-4c096fff466d",
+          "name": "Get affiliate config",
+          "request": {
+            "name": "Get affiliate config",
+            "description": {
+              "content": "Retrieve affiliate configuration for a given wallet address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "affiliate",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34d2859e-0098-407e-8e3d-488b376f1ff7",
+              "name": "Affiliate configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"mypartner\",\n  \"partnerBps\": 50,\n  \"shapeshiftBps\": 10,\n  \"isActive\": true,\n  \"createdAt\": \"2024-01-01T00:00:00.000Z\",\n  \"updatedAt\": \"2024-01-01T00:00:00.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36cddfe7-9181-4ab9-b9e4-a7022078aec7",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "96a2204a-8b46-4cd9-ac1f-5bce33c08e55",
+              "name": "Affiliate not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c43b96e0-88bf-4fbd-9c64-373486929bd0",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6689e665-38d9-4e7e-a82e-5f6f3dcb3cd5",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c91a08e0-ab7d-4a17-acfd-0cbf2ba75344",
+              "name": "Swap service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78393b04-742d-4cf3-9b5d-d66965357c00",
+              "name": "Swap service timed out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "397a1a72-19cf-4eeb-a315-69e798662d2a",
+          "name": "Update affiliate",
+          "request": {
+            "name": "Update affiliate",
+            "description": {
+              "content": "Update an existing affiliate configuration. Requires a valid SIWE JWT in the Authorization header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "affiliate",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiveAddress\": \"<string>\",\n  \"bps\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7c88aab-26f9-416d-931c-0c6f73d8cde2",
+              "name": "Updated affiliate configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"bps\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"walletAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerCode\": \"mypartner\",\n  \"partnerBps\": 50,\n  \"shapeshiftBps\": 10,\n  \"isActive\": true,\n  \"createdAt\": \"2024-01-01T00:00:00.000Z\",\n  \"updatedAt\": \"2024-01-01T00:00:00.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2c1796d-6718-44ad-b02e-6fa58d5f69bd",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"bps\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e341b233-fc36-495a-9e94-e3ab104f5f42",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"bps\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ebfee307-f437-4c7f-afda-3da1a311aaae",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"bps\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "10a0e356-819a-4e3b-bd95-52fe2f0e958a",
+              "name": "Affiliate not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"bps\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b7c24f0a-989c-4e20-8c8f-17d86a56dc05",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"bps\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25855ddb-f12f-4b16-b88d-61b543632bbd",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"bps\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6d45c4a8-050f-4084-b980-948dd1196a36",
+              "name": "Swap service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"bps\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a5df281d-e630-4774-9bea-2e2b203d64c5",
+              "name": "Swap service timed out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiveAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"bps\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "371759bd-bdfa-46b3-86bb-5cf6ade789f2",
+          "name": "Get affiliate statistics",
+          "request": {
+            "name": "Get affiliate statistics",
+            "description": {
+              "content": "Retrieve aggregated swap statistics for an affiliate by partnerCode. Returns total swaps, volume, and fees earned. Supports optional date range filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "affiliate",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerCode",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef302830-0b1e-4e28-bf4c-e382b7e83c47",
+              "name": "Affiliate statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalSwaps\": 42,\n  \"totalVolumeUsd\": \"12345.67\",\n  \"totalFeesEarnedUsd\": \"44.44\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3c63e48-f70c-438b-b022-7f15bd9e80b4",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6266dd9-2a3f-429b-a031-41bd9f97bdde",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "809dffca-66aa-45b5-af6f-c76e25366eb8",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c55beea-1aee-4d4c-9a40-ec60bbeb23fc",
+              "name": "Swap service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b7fb4b61-db3f-43ad-ad53-24206b3584f8",
+              "name": "Swap service timed out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77b51a71-5d36-42c8-93b5-f9980e423638",
+          "name": "Get affiliate swaps",
+          "request": {
+            "name": "Get affiliate swaps",
+            "description": {
+              "content": "Retrieve paginated swap history for an affiliate by partnerCode. Supports optional date range filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "affiliate",
+                "swaps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerCode",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "300c33ee-e0fc-4414-8a25-b2e15a697598",
+              "name": "Affiliate swaps",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "swaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"swaps\": [\n    {\n      \"swapId\": \"swap-uuid-1234\",\n      \"status\": \"completed\",\n      \"sellAsset\": {\n        \"assetId\": \"eip155:1/slip44:60\",\n        \"chainId\": \"eip155:1\",\n        \"name\": \"Ethereum\",\n        \"symbol\": \"ETH\",\n        \"precision\": 18,\n        \"color\": \"#5C6BC0\",\n        \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n        \"explorer\": \"https://etherscan.io\",\n        \"explorerAddressLink\": \"https://etherscan.io/address/\",\n        \"explorerTxLink\": \"https://etherscan.io/tx/\",\n        \"relatedAssetKey\": \"string\",\n        \"networkName\": \"Ethereum\",\n        \"networkColor\": \"#5C6BC0\",\n        \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n      },\n      \"buyAsset\": {\n        \"assetId\": \"eip155:1/slip44:60\",\n        \"chainId\": \"eip155:1\",\n        \"name\": \"Ethereum\",\n        \"symbol\": \"ETH\",\n        \"precision\": 18,\n        \"color\": \"#5C6BC0\",\n        \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n        \"explorer\": \"https://etherscan.io\",\n        \"explorerAddressLink\": \"https://etherscan.io/address/\",\n        \"explorerTxLink\": \"https://etherscan.io/tx/\",\n        \"relatedAssetKey\": \"string\",\n        \"networkName\": \"Ethereum\",\n        \"networkColor\": \"#5C6BC0\",\n        \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n      },\n      \"sellAmountCryptoPrecision\": \"1.0\",\n      \"sellAmountUsd\": \"1234.56\",\n      \"buyAmountCryptoPrecision\": \"948.0\",\n      \"buyAmountUsd\": \"1234.56\",\n      \"affiliateFeeAmountUsd\": \"3.70\",\n      \"affiliateBps\": 60,\n      \"partnerBps\": 20,\n      \"shapeshiftBps\": 10,\n      \"swapperName\": \"THORChain\",\n      \"sellTxHash\": \"0xabc123\",\n      \"buyTxHash\": \"0xdef456\",\n      \"isAffiliateVerified\": true,\n      \"createdAt\": \"2024-01-01T00:00:00.000Z\"\n    },\n    {\n      \"swapId\": \"swap-uuid-1234\",\n      \"status\": \"completed\",\n      \"sellAsset\": {\n        \"assetId\": \"eip155:1/slip44:60\",\n        \"chainId\": \"eip155:1\",\n        \"name\": \"Ethereum\",\n        \"symbol\": \"ETH\",\n        \"precision\": 18,\n        \"color\": \"#5C6BC0\",\n        \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n        \"explorer\": \"https://etherscan.io\",\n        \"explorerAddressLink\": \"https://etherscan.io/address/\",\n        \"explorerTxLink\": \"https://etherscan.io/tx/\",\n        \"relatedAssetKey\": \"string\",\n        \"networkName\": \"Ethereum\",\n        \"networkColor\": \"#5C6BC0\",\n        \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n      },\n      \"buyAsset\": {\n        \"assetId\": \"eip155:1/slip44:60\",\n        \"chainId\": \"eip155:1\",\n        \"name\": \"Ethereum\",\n        \"symbol\": \"ETH\",\n        \"precision\": 18,\n        \"color\": \"#5C6BC0\",\n        \"icon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\",\n        \"explorer\": \"https://etherscan.io\",\n        \"explorerAddressLink\": \"https://etherscan.io/address/\",\n        \"explorerTxLink\": \"https://etherscan.io/tx/\",\n        \"relatedAssetKey\": \"string\",\n        \"networkName\": \"Ethereum\",\n        \"networkColor\": \"#5C6BC0\",\n        \"networkIcon\": \"https://assets.coincap.io/assets/icons/eth@2x.png\"\n      },\n      \"sellAmountCryptoPrecision\": \"1.0\",\n      \"sellAmountUsd\": \"1234.56\",\n      \"buyAmountCryptoPrecision\": \"948.0\",\n      \"buyAmountUsd\": \"1234.56\",\n      \"affiliateFeeAmountUsd\": \"3.70\",\n      \"affiliateBps\": 60,\n      \"partnerBps\": 20,\n      \"shapeshiftBps\": 10,\n      \"swapperName\": \"THORChain\",\n      \"sellTxHash\": \"0xabc123\",\n      \"buyTxHash\": \"0xdef456\",\n      \"isAffiliateVerified\": true,\n      \"createdAt\": \"2024-01-01T00:00:00.000Z\"\n    }\n  ],\n  \"nextCursor\": \"swap-uuid-1234\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdf2dcb7-f3a4-4add-a8b1-1f6a9c60bd38",
+              "name": "Invalid query parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "swaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "595415c2-97e0-4d60-a468-fe07382e3da4",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "swaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "251349ed-47c3-48a6-8fe8-0ae9f1cd2451",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "swaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a254dd82-6560-43d2-960e-fe620d7d682e",
+              "name": "Swap service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "swaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d33a708f-1c76-4581-b0f7-763d30d68dd3",
+              "name": "Swap service timed out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "affiliate",
+                    "swaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2194f8d0-31b3-43ef-8519-65b111aed8ca",
+          "name": "Resolve a partner referral code",
+          "request": {
+            "name": "Resolve a partner referral code",
+            "description": {
+              "content": "Resolve a partner referral code to its attribution details (partner address and bps split).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "partner",
+                ":code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85e8eeea-3e66-4500-9564-83170bc8f007",
+              "name": "Partner attribution",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"partnerAddress\": \"0x1234567890123456789012345678901234567890\",\n  \"partnerBps\": 50,\n  \"partnerCode\": \"mypartner\",\n  \"shapeshiftBps\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4501762-e90e-4bd1-a28d-aa7f17068e34",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0e485223-6a6c-4753-90b1-bfa8c6f1f94e",
+              "name": "Partner code not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42d46dfd-1bfa-49ce-bee3-000d3c095e9b",
+              "name": "Rate limit exceeded. Includes Retry-After header with seconds until reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "Retry-After",
+                  "value": "30"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per window",
+                  "key": "RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in the current window",
+                  "key": "RateLimit-Remaining",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds until the rate limit window resets",
+                  "key": "RateLimit-Reset",
+                  "value": "30"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests, please try again later\",\n  \"code\": \"RATE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ce01971-cdd1-4020-b16f-b065f8761830",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "55a798f1-b431-4128-8060-2f9f027bdc34",
+              "name": "Swap service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe266077-21fd-483c-953b-be0415d49af3",
+              "name": "Swap service timed out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.shapeshift.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "57337142-0f82-41a1-8e30-b8f5bc3b9e52",
+    "name": "ShapeShift Public Affiliate API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ShapeShift Public API lets you integrate multi-chain swap functionality into your application. Fetch rates from multiple DEX aggregators and bridges, build executable quotes, and track swaps across supported blockchains.\n\n## Base URL\n\n```\nhttps://api.shapeshift.com\n```\n\nAll endpoints are versioned under `/v1` (e.g. `https://api.shapeshift.com/v1/swap/rates`). This interactive reference is served at `https://api.shapeshift.com/docs`, and the raw OpenAPI document at `https://api.shapeshift.com/docs/json`.\n\n## Two ways to integrate\n\n1. **Swap Widget SDK** — a drop-in React component with built-in UI, wallet connection, and multi-chain support. The fastest path. See the **Swap Widget SDK** section.\n2. **REST API** — call the endpoints directly and build your own UI for full control over UX. See the **REST API Guide** section, then the per-endpoint reference below.\n\n## Affiliate tracking (optional)\n\nSend an `X-Partner-Code` header with your registered partner code (e.g. `your-partner-code`) on the swap endpoints to attribute swaps for affiliate revenue share. The API attributes the swap to your affiliate account and applies your configured fee (bps) automatically. All endpoints work without it — unattributed swaps use the default fee. See the [Affiliate Program guide](https://github.com/shapeshift/web/blob/develop/docs/affiliates.md) for how to obtain a code.\n\n## Asset IDs (CAIP-19)\n\nAssets are identified with [CAIP-19](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-19.md): `{chainId}/{assetNamespace}:{assetReference}`\n\n- Native ETH: `eip155:1/slip44:60`\n- USDC on Ethereum: `eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`\n- Native BTC: `bip122:000000000019d6689c085ae165831e93/slip44:0`\n\nChains use [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) (e.g. `eip155:1`). Use `GET /v1/chains` and `GET /v1/assets` to discover supported values.\n\n## Errors\n\nErrors return the appropriate HTTP status and a JSON body:\n\n```json\n{ \"error\": \"Human-readable message\", \"code\": \"MACHINE_CODE\", \"details\": [] }\n```\n\n`code` and `details` are present where applicable (e.g. `QUOTE_NOT_FOUND`, `TX_HASH_REQUIRED`, `TX_HASH_MISMATCH`, `RATE_LIMIT_EXCEEDED`, validation `details`).\n\n## Rate limiting\n\nEndpoints are rate limited per IP on a fixed 60-second window. A global limit applies across all endpoints, and individual endpoint groups (data, rates, quote, status, affiliate) have their own independent limits on top of it — so a request counts against both. When either is exceeded, the API returns `429` with code `RATE_LIMIT_EXCEEDED` and these headers:\n\n- `Retry-After` — seconds until the window resets\n- `RateLimit-Limit` — max requests allowed per window\n- `RateLimit-Remaining` — requests remaining in the current window\n- `RateLimit-Reset` — seconds until the window resets\n\nBack off using `Retry-After` and avoid polling faster than necessary (see the REST API Guide for polling guidance).\n",
+      "type": "text/plain"
+    }
+  }
+}
