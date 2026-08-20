@@ -39,6 +39,15 @@ tags:
 - DEX Aggregator
 - Swaps
 - Blockchain
+- Wallets
+- Self-Custody
+tags_raw:
+- Company
+- Crypto
+- Cryptocurrency
+- DEX Aggregator
+- Swaps
+- Blockchain
 - Wallet
 - Self-Custody
 apis:
@@ -48,6 +57,8 @@ apis:
   humanURL: https://api.shapeshift.com/docs
   baseURL: https://api.shapeshift.com
   tags:
+  - Affiliates
+  tags_raw:
   - Affiliate
   properties:
   - type: OpenAPI
@@ -60,6 +71,8 @@ apis:
   humanURL: https://api.shapeshift.com/docs
   baseURL: https://api.shapeshift.com
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
