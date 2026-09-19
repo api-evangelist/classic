@@ -50,7 +50,7 @@ tags:
 - Crypto
 - Cryptocurrency
 - DEX Aggregator
-- Swaps
+- Swap
 - Blockchain
 - Wallets
 - Self-Custody
@@ -122,6 +122,8 @@ apis:
   humanURL: https://api.shapeshift.com/docs
   baseURL: https://api.shapeshift.com
   tags:
+  - Swap
+  tags_raw:
   - Swaps
   properties:
   - type: OpenAPI
