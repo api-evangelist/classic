@@ -1,11 +1,7 @@
 {
   "provider": "classic",
   "sources": [
-    "classic-affiliate-api-openapi.yml",
-    "classic-auth-api-openapi.yml",
-    "classic-supported-assets-api-openapi.yml",
-    "classic-supported-chains-api-openapi.yml",
-    "classic-swaps-api-openapi.yml"
+    "_original/classic-shapeshift-openapi-original.json"
   ],
   "outputs": [
     "classic-affiliate-api-openapi.yml",
@@ -17,6 +13,21 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "classic-shapeshift-openapi-original.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "classic-shapeshift-openapi-original.json: declared missing tag: Affiliate",
+    "classic-shapeshift-openapi-original.json: declared missing tag: Auth",
+    "classic-shapeshift-openapi-original.json: declared missing tag: Supported Assets",
+    "classic-shapeshift-openapi-original.json: declared missing tag: Supported Chains",
+    "classic-shapeshift-openapi-original.json: declared missing tag: Swaps",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "classic-affiliate-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "classic-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "classic-supported-assets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "classic-supported-chains-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "classic-swaps-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

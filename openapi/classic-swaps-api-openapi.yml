@@ -1,87 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: ShapeShift Public Affiliate Swaps API
-  description: 'The ShapeShift Public API lets you integrate multi-chain swap functionality into your application. Fetch rates from multiple DEX aggregators and bridges, build executable quotes, and track swaps across supported blockchains.
-
-
-    ## Base URL
-
-
-    ```
-
-    https://api.shapeshift.com
-
-    ```
-
-
-    All endpoints are versioned under `/v1` (e.g. `https://api.shapeshift.com/v1/swap/rates`). This interactive reference is served at `https://api.shapeshift.com/docs`, and the raw OpenAPI document at `https://api.shapeshift.com/docs/json`.
-
-
-    ## Two ways to integrate
-
-
-    1. **Swap Widget SDK** — a drop-in React component with built-in UI, wallet connection, and multi-chain support. The fastest path. See the **Swap Widget SDK** section.
-
-    2. **REST API** — call the endpoints directly and build your own UI for full control over UX. See the **REST API Guide** section, then the per-endpoint reference below.
-
-
-    ## Affiliate tracking (optional)
-
-
-    Send an `X-Partner-Code` header with your registered partner code (e.g. `your-partner-code`) on the swap endpoints to attribute swaps for affiliate revenue share. The API attributes the swap to your affiliate account and applies your configured fee (bps) automatically. All endpoints work without it — unattributed swaps use the default fee. See the [Affiliate Program guide](https://github.com/shapeshift/web/blob/develop/docs/affiliates.md) for how to obtain a code.
-
-
-    ## Asset IDs (CAIP-19)
-
-
-    Assets are identified with [CAIP-19](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-19.md): `{chainId}/{assetNamespace}:{assetReference}`
-
-
-    - Native ETH: `eip155:1/slip44:60`
-
-    - USDC on Ethereum: `eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
-
-    - Native BTC: `bip122:000000000019d6689c085ae165831e93/slip44:0`
-
-
-    Chains use [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) (e.g. `eip155:1`). Use `GET /v1/chains` and `GET /v1/assets` to discover supported values.
-
-
-    ## Errors
-
-
-    Errors return the appropriate HTTP status and a JSON body:
-
-
-    ```json
-
-    { "error": "Human-readable message", "code": "MACHINE_CODE", "details": [] }
-
-    ```
-
-
-    `code` and `details` are present where applicable (e.g. `QUOTE_NOT_FOUND`, `TX_HASH_REQUIRED`, `TX_HASH_MISMATCH`, `RATE_LIMIT_EXCEEDED`, validation `details`).
-
-
-    ## Rate limiting
-
-
-    Endpoints are rate limited per IP on a fixed 60-second window. A global limit applies across all endpoints, and individual endpoint groups (data, rates, quote, status, affiliate) have their own independent limits on top of it — so a request counts against both. When either is exceeded, the API returns `429` with code `RATE_LIMIT_EXCEEDED` and these headers:
-
-
-    - `Retry-After` — seconds until the window resets
-
-    - `RateLimit-Limit` — max requests allowed per window
-
-    - `RateLimit-Remaining` — requests remaining in the current window
-
-    - `RateLimit-Reset` — seconds until the window resets
-
-
-    Back off using `Retry-After` and avoid polling faster than necessary (see the REST API Guide for polling guidance).
-
-    '
+  title: ShapeShift Public Swaps API
+  description: The ShapeShift Public API lets you integrate multi-chain swap functionality into your application.
 servers:
 - url: https://api.shapeshift.com
 - url: http://localhost:3001
@@ -137,8 +58,9 @@ paths:
                   type: string
                   example: '0.01'
                 accountNumber:
-                  type: number
-                  nullable: true
+                  type:
+                  - number
+                  - 'null'
                   default: 0
                   example: 0
               required:
@@ -345,125 +267,6 @@ paths:
           description: Swap service timed out
 components:
   schemas:
-    RateResponse:
-      type: object
-      properties:
-        rates:
-          type: array
-          items:
-            type: object
-            properties:
-              swapperName:
-                type: string
-              rate:
-                type: string
-              buyAmountCryptoBaseUnit:
-                type: string
-              sellAmountCryptoBaseUnit:
-                type: string
-              steps:
-                type: number
-              estimatedExecutionTimeMs:
-                type: number
-              priceImpactPercentageDecimal:
-                type: string
-              affiliateBps:
-                type: string
-                description: Total on-chain fee in bps.
-                example: '60'
-              partnerBps:
-                type: string
-                description: Partner share in bps.
-                example: '50'
-              shapeshiftBps:
-                type: string
-                description: ShapeShift platform fee in bps.
-                example: '10'
-              networkFeeCryptoBaseUnit:
-                type: string
-              error:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  message:
-                    type: string
-                required:
-                - code
-                - message
-            required:
-            - swapperName
-            - rate
-            - buyAmountCryptoBaseUnit
-            - sellAmountCryptoBaseUnit
-            - steps
-            - affiliateBps
-            - shapeshiftBps
-        timestamp:
-          type: number
-        expiresAt:
-          type: number
-      required:
-      - rates
-      - timestamp
-      - expiresAt
-    SwapStatusResponse:
-      type: object
-      properties:
-        quoteId:
-          type: string
-          format: uuid
-        txHash:
-          type: string
-        status:
-          type: string
-          enum:
-          - pending
-          - submitted
-          - confirmed
-          - failed
-        swapperName:
-          type: string
-        sellAssetId:
-          type: string
-        buyAssetId:
-          type: string
-        sellAmountCryptoBaseUnit:
-          type: string
-        buyAmountAfterFeesCryptoBaseUnit:
-          type: string
-        partnerAddress:
-          type: string
-          pattern: ^0x[0-9a-fA-F]{40}$
-          example: '0x1234567890123456789012345678901234567890'
-        affiliateBps:
-          type: string
-          description: Total on-chain fee in bps.
-          example: '60'
-        partnerBps:
-          type: string
-          description: Partner share in bps.
-          example: '50'
-        shapeshiftBps:
-          type: string
-          description: ShapeShift platform fee in bps.
-          example: '10'
-        registeredAt:
-          type: number
-        buyTxHash:
-          type: string
-        isAffiliateVerified:
-          type: boolean
-      required:
-      - quoteId
-      - status
-      - swapperName
-      - sellAssetId
-      - buyAssetId
-      - sellAmountCryptoBaseUnit
-      - buyAmountAfterFeesCryptoBaseUnit
-      - affiliateBps
-      - shapeshiftBps
     QuoteStep:
       type: object
       properties:
@@ -519,8 +322,7 @@ components:
                     - permit2
                   eip712:
                     type: object
-                    additionalProperties:
-                      nullable: true
+                    additionalProperties: {}
                 required:
                 - type
                 - eip712
@@ -679,8 +481,9 @@ components:
           type: string
           example: https://etherscan.io/tx/
         relatedAssetKey:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       required:
       - assetId
       - chainId
@@ -707,6 +510,125 @@ components:
       required:
       - error
       - code
+    RateResponse:
+      type: object
+      properties:
+        rates:
+          type: array
+          items:
+            type: object
+            properties:
+              swapperName:
+                type: string
+              rate:
+                type: string
+              buyAmountCryptoBaseUnit:
+                type: string
+              sellAmountCryptoBaseUnit:
+                type: string
+              steps:
+                type: number
+              estimatedExecutionTimeMs:
+                type: number
+              priceImpactPercentageDecimal:
+                type: string
+              affiliateBps:
+                type: string
+                description: Total on-chain fee in bps.
+                example: '60'
+              partnerBps:
+                type: string
+                description: Partner share in bps.
+                example: '50'
+              shapeshiftBps:
+                type: string
+                description: ShapeShift platform fee in bps.
+                example: '10'
+              networkFeeCryptoBaseUnit:
+                type: string
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - code
+                - message
+            required:
+            - swapperName
+            - rate
+            - buyAmountCryptoBaseUnit
+            - sellAmountCryptoBaseUnit
+            - steps
+            - affiliateBps
+            - shapeshiftBps
+        timestamp:
+          type: number
+        expiresAt:
+          type: number
+      required:
+      - rates
+      - timestamp
+      - expiresAt
+    SwapStatusResponse:
+      type: object
+      properties:
+        quoteId:
+          type: string
+          format: uuid
+        txHash:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - submitted
+          - confirmed
+          - failed
+        swapperName:
+          type: string
+        sellAssetId:
+          type: string
+        buyAssetId:
+          type: string
+        sellAmountCryptoBaseUnit:
+          type: string
+        buyAmountAfterFeesCryptoBaseUnit:
+          type: string
+        partnerAddress:
+          type: string
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        affiliateBps:
+          type: string
+          description: Total on-chain fee in bps.
+          example: '60'
+        partnerBps:
+          type: string
+          description: Partner share in bps.
+          example: '50'
+        shapeshiftBps:
+          type: string
+          description: ShapeShift platform fee in bps.
+          example: '10'
+        registeredAt:
+          type: number
+        buyTxHash:
+          type: string
+        isAffiliateVerified:
+          type: boolean
+      required:
+      - quoteId
+      - status
+      - swapperName
+      - sellAssetId
+      - buyAssetId
+      - sellAmountCryptoBaseUnit
+      - buyAmountAfterFeesCryptoBaseUnit
+      - affiliateBps
+      - shapeshiftBps
     QuoteResponse:
       type: object
       properties:
