@@ -267,6 +267,197 @@ paths:
           description: Swap service timed out
 components:
   schemas:
+    SwapStatusResponse:
+      type: object
+      properties:
+        quoteId:
+          type: string
+          format: uuid
+        txHash:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - submitted
+          - confirmed
+          - failed
+        swapperName:
+          type: string
+        sellAssetId:
+          type: string
+        buyAssetId:
+          type: string
+        sellAmountCryptoBaseUnit:
+          type: string
+        buyAmountAfterFeesCryptoBaseUnit:
+          type: string
+        partnerAddress:
+          type: string
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        affiliateBps:
+          type: string
+          description: Total on-chain fee in bps.
+          example: '60'
+        partnerBps:
+          type: string
+          description: Partner share in bps.
+          example: '50'
+        shapeshiftBps:
+          type: string
+          description: ShapeShift platform fee in bps.
+          example: '10'
+        registeredAt:
+          type: number
+        buyTxHash:
+          type: string
+        isAffiliateVerified:
+          type: boolean
+      required:
+      - quoteId
+      - status
+      - swapperName
+      - sellAssetId
+      - buyAssetId
+      - sellAmountCryptoBaseUnit
+      - buyAmountAfterFeesCryptoBaseUnit
+      - affiliateBps
+      - shapeshiftBps
+    RateResponse:
+      type: object
+      properties:
+        rates:
+          type: array
+          items:
+            type: object
+            properties:
+              swapperName:
+                type: string
+              rate:
+                type: string
+              buyAmountCryptoBaseUnit:
+                type: string
+              sellAmountCryptoBaseUnit:
+                type: string
+              steps:
+                type: number
+              estimatedExecutionTimeMs:
+                type: number
+              priceImpactPercentageDecimal:
+                type: string
+              affiliateBps:
+                type: string
+                description: Total on-chain fee in bps.
+                example: '60'
+              partnerBps:
+                type: string
+                description: Partner share in bps.
+                example: '50'
+              shapeshiftBps:
+                type: string
+                description: ShapeShift platform fee in bps.
+                example: '10'
+              networkFeeCryptoBaseUnit:
+                type: string
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - code
+                - message
+            required:
+            - swapperName
+            - rate
+            - buyAmountCryptoBaseUnit
+            - sellAmountCryptoBaseUnit
+            - steps
+            - affiliateBps
+            - shapeshiftBps
+        timestamp:
+          type: number
+        expiresAt:
+          type: number
+      required:
+      - rates
+      - timestamp
+      - expiresAt
+    Asset:
+      type: object
+      properties:
+        assetId:
+          type: string
+          example: eip155:1/slip44:60
+        chainId:
+          type: string
+          example: eip155:1
+        name:
+          type: string
+          example: Ethereum
+        symbol:
+          type: string
+          example: ETH
+        precision:
+          type: number
+          example: 18
+        color:
+          type: string
+          example: '#5C6BC0'
+        icon:
+          type: string
+          example: https://assets.coincap.io/assets/icons/eth@2x.png
+        networkName:
+          type: string
+          example: Ethereum
+        networkColor:
+          type: string
+          example: '#5C6BC0'
+        networkIcon:
+          type: string
+          example: https://assets.coincap.io/assets/icons/eth@2x.png
+        explorer:
+          type: string
+          example: https://etherscan.io
+        explorerAddressLink:
+          type: string
+          example: https://etherscan.io/address/
+        explorerTxLink:
+          type: string
+          example: https://etherscan.io/tx/
+        relatedAssetKey:
+          type:
+          - string
+          - 'null'
+      required:
+      - assetId
+      - chainId
+      - name
+      - symbol
+      - precision
+      - color
+      - icon
+      - explorer
+      - explorerAddressLink
+      - explorerTxLink
+      - relatedAssetKey
+    RateLimitError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Too many requests, please try again later
+        code:
+          type: string
+          enum:
+          - RATE_LIMIT_EXCEEDED
+          example: RATE_LIMIT_EXCEEDED
+      required:
+      - error
+      - code
     QuoteStep:
       type: object
       properties:
@@ -438,197 +629,6 @@ components:
       - buyAmountAfterFeesCryptoBaseUnit
       - allowanceContract
       - source
-    Asset:
-      type: object
-      properties:
-        assetId:
-          type: string
-          example: eip155:1/slip44:60
-        chainId:
-          type: string
-          example: eip155:1
-        name:
-          type: string
-          example: Ethereum
-        symbol:
-          type: string
-          example: ETH
-        precision:
-          type: number
-          example: 18
-        color:
-          type: string
-          example: '#5C6BC0'
-        icon:
-          type: string
-          example: https://assets.coincap.io/assets/icons/eth@2x.png
-        networkName:
-          type: string
-          example: Ethereum
-        networkColor:
-          type: string
-          example: '#5C6BC0'
-        networkIcon:
-          type: string
-          example: https://assets.coincap.io/assets/icons/eth@2x.png
-        explorer:
-          type: string
-          example: https://etherscan.io
-        explorerAddressLink:
-          type: string
-          example: https://etherscan.io/address/
-        explorerTxLink:
-          type: string
-          example: https://etherscan.io/tx/
-        relatedAssetKey:
-          type:
-          - string
-          - 'null'
-      required:
-      - assetId
-      - chainId
-      - name
-      - symbol
-      - precision
-      - color
-      - icon
-      - explorer
-      - explorerAddressLink
-      - explorerTxLink
-      - relatedAssetKey
-    RateLimitError:
-      type: object
-      properties:
-        error:
-          type: string
-          example: Too many requests, please try again later
-        code:
-          type: string
-          enum:
-          - RATE_LIMIT_EXCEEDED
-          example: RATE_LIMIT_EXCEEDED
-      required:
-      - error
-      - code
-    RateResponse:
-      type: object
-      properties:
-        rates:
-          type: array
-          items:
-            type: object
-            properties:
-              swapperName:
-                type: string
-              rate:
-                type: string
-              buyAmountCryptoBaseUnit:
-                type: string
-              sellAmountCryptoBaseUnit:
-                type: string
-              steps:
-                type: number
-              estimatedExecutionTimeMs:
-                type: number
-              priceImpactPercentageDecimal:
-                type: string
-              affiliateBps:
-                type: string
-                description: Total on-chain fee in bps.
-                example: '60'
-              partnerBps:
-                type: string
-                description: Partner share in bps.
-                example: '50'
-              shapeshiftBps:
-                type: string
-                description: ShapeShift platform fee in bps.
-                example: '10'
-              networkFeeCryptoBaseUnit:
-                type: string
-              error:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  message:
-                    type: string
-                required:
-                - code
-                - message
-            required:
-            - swapperName
-            - rate
-            - buyAmountCryptoBaseUnit
-            - sellAmountCryptoBaseUnit
-            - steps
-            - affiliateBps
-            - shapeshiftBps
-        timestamp:
-          type: number
-        expiresAt:
-          type: number
-      required:
-      - rates
-      - timestamp
-      - expiresAt
-    SwapStatusResponse:
-      type: object
-      properties:
-        quoteId:
-          type: string
-          format: uuid
-        txHash:
-          type: string
-        status:
-          type: string
-          enum:
-          - pending
-          - submitted
-          - confirmed
-          - failed
-        swapperName:
-          type: string
-        sellAssetId:
-          type: string
-        buyAssetId:
-          type: string
-        sellAmountCryptoBaseUnit:
-          type: string
-        buyAmountAfterFeesCryptoBaseUnit:
-          type: string
-        partnerAddress:
-          type: string
-          pattern: ^0x[0-9a-fA-F]{40}$
-          example: '0x1234567890123456789012345678901234567890'
-        affiliateBps:
-          type: string
-          description: Total on-chain fee in bps.
-          example: '60'
-        partnerBps:
-          type: string
-          description: Partner share in bps.
-          example: '50'
-        shapeshiftBps:
-          type: string
-          description: ShapeShift platform fee in bps.
-          example: '10'
-        registeredAt:
-          type: number
-        buyTxHash:
-          type: string
-        isAffiliateVerified:
-          type: boolean
-      required:
-      - quoteId
-      - status
-      - swapperName
-      - sellAssetId
-      - buyAssetId
-      - sellAmountCryptoBaseUnit
-      - buyAmountAfterFeesCryptoBaseUnit
-      - affiliateBps
-      - shapeshiftBps
     QuoteResponse:
       type: object
       properties:

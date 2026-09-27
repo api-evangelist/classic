@@ -122,14 +122,6 @@ paths:
           description: Swap service timed out
 components:
   schemas:
-    SiweNonceResponse:
-      type: object
-      properties:
-        nonce:
-          type: string
-          example: abcdef123456
-      required:
-      - nonce
     RateLimitError:
       type: object
       properties:
@@ -144,6 +136,14 @@ components:
       required:
       - error
       - code
+    SiweNonceResponse:
+      type: object
+      properties:
+        nonce:
+          type: string
+          example: abcdef123456
+      required:
+      - nonce
     SiweVerifyResponse:
       type: object
       properties:
