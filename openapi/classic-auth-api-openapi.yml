@@ -122,20 +122,6 @@ paths:
           description: Swap service timed out
 components:
   schemas:
-    RateLimitError:
-      type: object
-      properties:
-        error:
-          type: string
-          example: Too many requests, please try again later
-        code:
-          type: string
-          enum:
-          - RATE_LIMIT_EXCEEDED
-          example: RATE_LIMIT_EXCEEDED
-      required:
-      - error
-      - code
     SiweNonceResponse:
       type: object
       properties:
@@ -156,3 +142,17 @@ components:
       required:
       - token
       - address
+    RateLimitError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Too many requests, please try again later
+        code:
+          type: string
+          enum:
+          - RATE_LIMIT_EXCEEDED
+          example: RATE_LIMIT_EXCEEDED
+      required:
+      - error
+      - code
