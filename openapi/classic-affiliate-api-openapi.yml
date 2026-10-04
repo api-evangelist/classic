@@ -440,21 +440,68 @@ paths:
           description: Swap service timed out
 components:
   schemas:
-    AffiliateSwapsResponse:
+    AffiliateStatsResponse:
       type: object
       properties:
-        swaps:
-          type: array
-          items:
-            $ref: '#/components/schemas/AffiliateSwap'
-        nextCursor:
+        totalSwaps:
+          type: number
+          example: 42
+        totalVolumeUsd:
+          type: string
+          example: '12345.67'
+        totalFeesEarnedUsd:
+          type: string
+          example: '44.44'
+      required:
+      - totalSwaps
+      - totalVolumeUsd
+      - totalFeesEarnedUsd
+    AffiliateConfig:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        walletAddress:
+          type: string
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        receiveAddress:
           type:
           - string
           - 'null'
-          example: swap-uuid-1234
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        partnerCode:
+          type: string
+          example: mypartner
+        partnerBps:
+          type: number
+          example: 50
+        shapeshiftBps:
+          type: number
+          example: 10
+        isActive:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00.000Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00.000Z'
       required:
-      - swaps
-      - nextCursor
+      - id
+      - walletAddress
+      - receiveAddress
+      - partnerCode
+      - partnerBps
+      - shapeshiftBps
+      - isActive
+      - createdAt
+      - updatedAt
     PartnerResolution:
       type: object
       properties:
@@ -478,22 +525,20 @@ components:
       - partnerBps
       - partnerCode
       - shapeshiftBps
-    AffiliateStatsResponse:
+    RateLimitError:
       type: object
       properties:
-        totalSwaps:
-          type: number
-          example: 42
-        totalVolumeUsd:
+        error:
           type: string
-          example: '12345.67'
-        totalFeesEarnedUsd:
+          example: Too many requests, please try again later
+        code:
           type: string
-          example: '44.44'
+          enum:
+          - RATE_LIMIT_EXCEEDED
+          example: RATE_LIMIT_EXCEEDED
       required:
-      - totalSwaps
-      - totalVolumeUsd
-      - totalFeesEarnedUsd
+      - error
+      - code
     Asset:
       type: object
       properties:
@@ -552,52 +597,21 @@ components:
       - explorerAddressLink
       - explorerTxLink
       - relatedAssetKey
-    AffiliateConfig:
+    AffiliateSwapsResponse:
       type: object
       properties:
-        id:
-          type: string
-          example: abc123
-        walletAddress:
-          type: string
-          pattern: ^0x[0-9a-fA-F]{40}$
-          example: '0x1234567890123456789012345678901234567890'
-        receiveAddress:
+        swaps:
+          type: array
+          items:
+            $ref: '#/components/schemas/AffiliateSwap'
+        nextCursor:
           type:
           - string
           - 'null'
-          pattern: ^0x[0-9a-fA-F]{40}$
-          example: '0x1234567890123456789012345678901234567890'
-        partnerCode:
-          type: string
-          example: mypartner
-        partnerBps:
-          type: number
-          example: 50
-        shapeshiftBps:
-          type: number
-          example: 10
-        isActive:
-          type: boolean
-          example: true
-        createdAt:
-          type: string
-          format: date-time
-          example: '2024-01-01T00:00:00.000Z'
-        updatedAt:
-          type: string
-          format: date-time
-          example: '2024-01-01T00:00:00.000Z'
+          example: swap-uuid-1234
       required:
-      - id
-      - walletAddress
-      - receiveAddress
-      - partnerCode
-      - partnerBps
-      - shapeshiftBps
-      - isActive
-      - createdAt
-      - updatedAt
+      - swaps
+      - nextCursor
     AffiliateSwap:
       type: object
       properties:
@@ -687,17 +701,3 @@ components:
       - buyTxHash
       - isAffiliateVerified
       - createdAt
-    RateLimitError:
-      type: object
-      properties:
-        error:
-          type: string
-          example: Too many requests, please try again later
-        code:
-          type: string
-          enum:
-          - RATE_LIMIT_EXCEEDED
-          example: RATE_LIMIT_EXCEEDED
-      required:
-      - error
-      - code
