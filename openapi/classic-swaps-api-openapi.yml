@@ -267,6 +267,108 @@ paths:
           description: Swap service timed out
 components:
   schemas:
+    QuoteResponse:
+      type: object
+      properties:
+        quoteId:
+          type: string
+          format: uuid
+        swapperName:
+          type: string
+          example: 0x
+        rate:
+          type: string
+          example: '0.995'
+        sellAsset:
+          $ref: '#/components/schemas/Asset'
+        buyAsset:
+          $ref: '#/components/schemas/Asset'
+        sellAmountCryptoBaseUnit:
+          type: string
+        buyAmountBeforeFeesCryptoBaseUnit:
+          type: string
+        buyAmountAfterFeesCryptoBaseUnit:
+          type: string
+        affiliateBps:
+          type: string
+          description: Total on-chain fee in bps.
+          example: '60'
+        partnerBps:
+          type: string
+          description: Partner share in bps.
+          example: '50'
+        shapeshiftBps:
+          type: string
+          description: ShapeShift platform fee in bps.
+          example: '10'
+        slippageTolerancePercentageDecimal:
+          type: string
+          example: '0.01'
+        networkFeeCryptoBaseUnit:
+          type: string
+          example: '23000'
+        approval:
+          type: object
+          properties:
+            isRequired:
+              type: boolean
+              example: true
+            spender:
+              type: string
+              example: '0xdef1c0ded9bec7f1a1670819833240f027b25eff'
+            approvalTx:
+              type: object
+              properties:
+                to:
+                  type: string
+                  example: '0xdef1c0ded9bec7f1a1670819833240f027b25eff'
+                data:
+                  type: string
+                  example: 0x
+                value:
+                  type: string
+                  example: '0'
+              required:
+              - to
+              - data
+              - value
+          required:
+          - isRequired
+          - spender
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteStep'
+        expiresAt:
+          type: number
+      required:
+      - quoteId
+      - swapperName
+      - rate
+      - sellAsset
+      - buyAsset
+      - sellAmountCryptoBaseUnit
+      - buyAmountBeforeFeesCryptoBaseUnit
+      - buyAmountAfterFeesCryptoBaseUnit
+      - affiliateBps
+      - shapeshiftBps
+      - approval
+      - steps
+      - expiresAt
+    RateLimitError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Too many requests, please try again later
+        code:
+          type: string
+          enum:
+          - RATE_LIMIT_EXCEEDED
+          example: RATE_LIMIT_EXCEEDED
+      required:
+      - error
+      - code
     SwapStatusResponse:
       type: object
       properties:
@@ -324,6 +426,64 @@ components:
       - buyAmountAfterFeesCryptoBaseUnit
       - affiliateBps
       - shapeshiftBps
+    Asset:
+      type: object
+      properties:
+        assetId:
+          type: string
+          example: eip155:1/slip44:60
+        chainId:
+          type: string
+          example: eip155:1
+        name:
+          type: string
+          example: Ethereum
+        symbol:
+          type: string
+          example: ETH
+        precision:
+          type: number
+          example: 18
+        color:
+          type: string
+          example: '#5C6BC0'
+        icon:
+          type: string
+          example: https://assets.coincap.io/assets/icons/eth@2x.png
+        networkName:
+          type: string
+          example: Ethereum
+        networkColor:
+          type: string
+          example: '#5C6BC0'
+        networkIcon:
+          type: string
+          example: https://assets.coincap.io/assets/icons/eth@2x.png
+        explorer:
+          type: string
+          example: https://etherscan.io
+        explorerAddressLink:
+          type: string
+          example: https://etherscan.io/address/
+        explorerTxLink:
+          type: string
+          example: https://etherscan.io/tx/
+        relatedAssetKey:
+          type:
+          - string
+          - 'null'
+      required:
+      - assetId
+      - chainId
+      - name
+      - symbol
+      - precision
+      - color
+      - icon
+      - explorer
+      - explorerAddressLink
+      - explorerTxLink
+      - relatedAssetKey
     RateResponse:
       type: object
       properties:
@@ -557,163 +717,3 @@ components:
       - buyAmountAfterFeesCryptoBaseUnit
       - allowanceContract
       - source
-    QuoteResponse:
-      type: object
-      properties:
-        quoteId:
-          type: string
-          format: uuid
-        swapperName:
-          type: string
-          example: 0x
-        rate:
-          type: string
-          example: '0.995'
-        sellAsset:
-          $ref: '#/components/schemas/Asset'
-        buyAsset:
-          $ref: '#/components/schemas/Asset'
-        sellAmountCryptoBaseUnit:
-          type: string
-        buyAmountBeforeFeesCryptoBaseUnit:
-          type: string
-        buyAmountAfterFeesCryptoBaseUnit:
-          type: string
-        affiliateBps:
-          type: string
-          description: Total on-chain fee in bps.
-          example: '60'
-        partnerBps:
-          type: string
-          description: Partner share in bps.
-          example: '50'
-        shapeshiftBps:
-          type: string
-          description: ShapeShift platform fee in bps.
-          example: '10'
-        slippageTolerancePercentageDecimal:
-          type: string
-          example: '0.01'
-        networkFeeCryptoBaseUnit:
-          type: string
-          example: '23000'
-        approval:
-          type: object
-          properties:
-            isRequired:
-              type: boolean
-              example: true
-            spender:
-              type: string
-              example: '0xdef1c0ded9bec7f1a1670819833240f027b25eff'
-            approvalTx:
-              type: object
-              properties:
-                to:
-                  type: string
-                  example: '0xdef1c0ded9bec7f1a1670819833240f027b25eff'
-                data:
-                  type: string
-                  example: 0x
-                value:
-                  type: string
-                  example: '0'
-              required:
-              - to
-              - data
-              - value
-          required:
-          - isRequired
-          - spender
-        steps:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteStep'
-        expiresAt:
-          type: number
-      required:
-      - quoteId
-      - swapperName
-      - rate
-      - sellAsset
-      - buyAsset
-      - sellAmountCryptoBaseUnit
-      - buyAmountBeforeFeesCryptoBaseUnit
-      - buyAmountAfterFeesCryptoBaseUnit
-      - affiliateBps
-      - shapeshiftBps
-      - approval
-      - steps
-      - expiresAt
-    RateLimitError:
-      type: object
-      properties:
-        error:
-          type: string
-          example: Too many requests, please try again later
-        code:
-          type: string
-          enum:
-          - RATE_LIMIT_EXCEEDED
-          example: RATE_LIMIT_EXCEEDED
-      required:
-      - error
-      - code
-    Asset:
-      type: object
-      properties:
-        assetId:
-          type: string
-          example: eip155:1/slip44:60
-        chainId:
-          type: string
-          example: eip155:1
-        name:
-          type: string
-          example: Ethereum
-        symbol:
-          type: string
-          example: ETH
-        precision:
-          type: number
-          example: 18
-        color:
-          type: string
-          example: '#5C6BC0'
-        icon:
-          type: string
-          example: https://assets.coincap.io/assets/icons/eth@2x.png
-        networkName:
-          type: string
-          example: Ethereum
-        networkColor:
-          type: string
-          example: '#5C6BC0'
-        networkIcon:
-          type: string
-          example: https://assets.coincap.io/assets/icons/eth@2x.png
-        explorer:
-          type: string
-          example: https://etherscan.io
-        explorerAddressLink:
-          type: string
-          example: https://etherscan.io/address/
-        explorerTxLink:
-          type: string
-          example: https://etherscan.io/tx/
-        relatedAssetKey:
-          type:
-          - string
-          - 'null'
-      required:
-      - assetId
-      - chainId
-      - name
-      - symbol
-      - precision
-      - color
-      - icon
-      - explorer
-      - explorerAddressLink
-      - explorerTxLink
-      - relatedAssetKey

@@ -440,178 +440,6 @@ paths:
           description: Swap service timed out
 components:
   schemas:
-    AffiliateStatsResponse:
-      type: object
-      properties:
-        totalSwaps:
-          type: number
-          example: 42
-        totalVolumeUsd:
-          type: string
-          example: '12345.67'
-        totalFeesEarnedUsd:
-          type: string
-          example: '44.44'
-      required:
-      - totalSwaps
-      - totalVolumeUsd
-      - totalFeesEarnedUsd
-    AffiliateConfig:
-      type: object
-      properties:
-        id:
-          type: string
-          example: abc123
-        walletAddress:
-          type: string
-          pattern: ^0x[0-9a-fA-F]{40}$
-          example: '0x1234567890123456789012345678901234567890'
-        receiveAddress:
-          type:
-          - string
-          - 'null'
-          pattern: ^0x[0-9a-fA-F]{40}$
-          example: '0x1234567890123456789012345678901234567890'
-        partnerCode:
-          type: string
-          example: mypartner
-        partnerBps:
-          type: number
-          example: 50
-        shapeshiftBps:
-          type: number
-          example: 10
-        isActive:
-          type: boolean
-          example: true
-        createdAt:
-          type: string
-          format: date-time
-          example: '2024-01-01T00:00:00.000Z'
-        updatedAt:
-          type: string
-          format: date-time
-          example: '2024-01-01T00:00:00.000Z'
-      required:
-      - id
-      - walletAddress
-      - receiveAddress
-      - partnerCode
-      - partnerBps
-      - shapeshiftBps
-      - isActive
-      - createdAt
-      - updatedAt
-    PartnerResolution:
-      type: object
-      properties:
-        partnerAddress:
-          type: string
-          pattern: ^0x[0-9a-fA-F]{40}$
-          example: '0x1234567890123456789012345678901234567890'
-        partnerBps:
-          type: integer
-          minimum: 0
-          example: 50
-        partnerCode:
-          type: string
-          example: mypartner
-        shapeshiftBps:
-          type: integer
-          minimum: 0
-          example: 10
-      required:
-      - partnerAddress
-      - partnerBps
-      - partnerCode
-      - shapeshiftBps
-    RateLimitError:
-      type: object
-      properties:
-        error:
-          type: string
-          example: Too many requests, please try again later
-        code:
-          type: string
-          enum:
-          - RATE_LIMIT_EXCEEDED
-          example: RATE_LIMIT_EXCEEDED
-      required:
-      - error
-      - code
-    Asset:
-      type: object
-      properties:
-        assetId:
-          type: string
-          example: eip155:1/slip44:60
-        chainId:
-          type: string
-          example: eip155:1
-        name:
-          type: string
-          example: Ethereum
-        symbol:
-          type: string
-          example: ETH
-        precision:
-          type: number
-          example: 18
-        color:
-          type: string
-          example: '#5C6BC0'
-        icon:
-          type: string
-          example: https://assets.coincap.io/assets/icons/eth@2x.png
-        networkName:
-          type: string
-          example: Ethereum
-        networkColor:
-          type: string
-          example: '#5C6BC0'
-        networkIcon:
-          type: string
-          example: https://assets.coincap.io/assets/icons/eth@2x.png
-        explorer:
-          type: string
-          example: https://etherscan.io
-        explorerAddressLink:
-          type: string
-          example: https://etherscan.io/address/
-        explorerTxLink:
-          type: string
-          example: https://etherscan.io/tx/
-        relatedAssetKey:
-          type:
-          - string
-          - 'null'
-      required:
-      - assetId
-      - chainId
-      - name
-      - symbol
-      - precision
-      - color
-      - icon
-      - explorer
-      - explorerAddressLink
-      - explorerTxLink
-      - relatedAssetKey
-    AffiliateSwapsResponse:
-      type: object
-      properties:
-        swaps:
-          type: array
-          items:
-            $ref: '#/components/schemas/AffiliateSwap'
-        nextCursor:
-          type:
-          - string
-          - 'null'
-          example: swap-uuid-1234
-      required:
-      - swaps
-      - nextCursor
     AffiliateSwap:
       type: object
       properties:
@@ -701,3 +529,175 @@ components:
       - buyTxHash
       - isAffiliateVerified
       - createdAt
+    RateLimitError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Too many requests, please try again later
+        code:
+          type: string
+          enum:
+          - RATE_LIMIT_EXCEEDED
+          example: RATE_LIMIT_EXCEEDED
+      required:
+      - error
+      - code
+    Asset:
+      type: object
+      properties:
+        assetId:
+          type: string
+          example: eip155:1/slip44:60
+        chainId:
+          type: string
+          example: eip155:1
+        name:
+          type: string
+          example: Ethereum
+        symbol:
+          type: string
+          example: ETH
+        precision:
+          type: number
+          example: 18
+        color:
+          type: string
+          example: '#5C6BC0'
+        icon:
+          type: string
+          example: https://assets.coincap.io/assets/icons/eth@2x.png
+        networkName:
+          type: string
+          example: Ethereum
+        networkColor:
+          type: string
+          example: '#5C6BC0'
+        networkIcon:
+          type: string
+          example: https://assets.coincap.io/assets/icons/eth@2x.png
+        explorer:
+          type: string
+          example: https://etherscan.io
+        explorerAddressLink:
+          type: string
+          example: https://etherscan.io/address/
+        explorerTxLink:
+          type: string
+          example: https://etherscan.io/tx/
+        relatedAssetKey:
+          type:
+          - string
+          - 'null'
+      required:
+      - assetId
+      - chainId
+      - name
+      - symbol
+      - precision
+      - color
+      - icon
+      - explorer
+      - explorerAddressLink
+      - explorerTxLink
+      - relatedAssetKey
+    AffiliateConfig:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        walletAddress:
+          type: string
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        receiveAddress:
+          type:
+          - string
+          - 'null'
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        partnerCode:
+          type: string
+          example: mypartner
+        partnerBps:
+          type: number
+          example: 50
+        shapeshiftBps:
+          type: number
+          example: 10
+        isActive:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00.000Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00.000Z'
+      required:
+      - id
+      - walletAddress
+      - receiveAddress
+      - partnerCode
+      - partnerBps
+      - shapeshiftBps
+      - isActive
+      - createdAt
+      - updatedAt
+    AffiliateSwapsResponse:
+      type: object
+      properties:
+        swaps:
+          type: array
+          items:
+            $ref: '#/components/schemas/AffiliateSwap'
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          example: swap-uuid-1234
+      required:
+      - swaps
+      - nextCursor
+    AffiliateStatsResponse:
+      type: object
+      properties:
+        totalSwaps:
+          type: number
+          example: 42
+        totalVolumeUsd:
+          type: string
+          example: '12345.67'
+        totalFeesEarnedUsd:
+          type: string
+          example: '44.44'
+      required:
+      - totalSwaps
+      - totalVolumeUsd
+      - totalFeesEarnedUsd
+    PartnerResolution:
+      type: object
+      properties:
+        partnerAddress:
+          type: string
+          pattern: ^0x[0-9a-fA-F]{40}$
+          example: '0x1234567890123456789012345678901234567890'
+        partnerBps:
+          type: integer
+          minimum: 0
+          example: 50
+        partnerCode:
+          type: string
+          example: mypartner
+        shapeshiftBps:
+          type: integer
+          minimum: 0
+          example: 10
+      required:
+      - partnerAddress
+      - partnerBps
+      - partnerCode
+      - shapeshiftBps
